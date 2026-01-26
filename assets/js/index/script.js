@@ -7,6 +7,7 @@ import {
   bannerRevealWithContent,
   chefSectionAnimation,
   menuGalleryReveal,
+  cursor,
 } from "../../main/js/global.min.js";
 ("use strict");
 $ = jQuery;
@@ -38,6 +39,7 @@ const init = () => {
   headerScroll();
   chefSectionAnimation();
   menuGalleryReveal();
+  cursor();
 };
 preloadImages("img").then(() => {
   init();
@@ -67,8 +69,6 @@ const footer = document.querySelector("footer");
 if (footer) {
   const updateFooterHeight = () => {
     const height = footer.offsetHeight;
-    console.log("Footer height hiện tại:", height, "px");
-
     document.documentElement.style.setProperty(
       "--footer-height",
       `${height}px`,
@@ -80,6 +80,3 @@ if (footer) {
   const resizeObserver = new ResizeObserver(updateFooterHeight);
   resizeObserver.observe(footer);
 }
-MouseFollower.registerGSAP(gsap);
-
-const cursor = new MouseFollower();

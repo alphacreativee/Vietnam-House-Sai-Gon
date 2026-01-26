@@ -481,3 +481,9 @@ export function menuGalleryReveal() {
   // Optional: làm chậm để test
   // masterTl.timeScale(0.7);
 }
+
+export function cursor() {
+  MouseFollower.registerGSAP(gsap);
+
+  const cursor = new MouseFollower();
+}
