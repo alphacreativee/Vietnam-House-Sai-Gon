@@ -265,6 +265,13 @@ section {
     transform: translate3d(0, 0, 0);
   }
 }
+.mf-cursor:before {
+  width: 24px;
+  height: 24px;
+  top: -12px;
+  left: -12px;
+}
+
 #header {
   position: fixed;
   top: 0;
