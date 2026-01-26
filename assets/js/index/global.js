@@ -189,17 +189,13 @@ export function bannerRevealWithContent() {
 
   const masterTl = gsap.timeline();
 
-  // 1. Banner Reveal Animation
   elements.forEach((element) => {
     const overlay = element.querySelector(".reveal-overlay");
-    const img = element.querySelector("img");
-
-    // Set initial state - ẩn overlay ngay từ đầu
+    const media = element.querySelector("img, video");
     gsap.set(overlay, { scaleX: 0, transformOrigin: "left" });
 
     const tl = gsap.timeline();
 
-    // Overlay chạy từ trái sang phải
     tl.fromTo(
       overlay,
       { scaleX: 0, transformOrigin: "left" },
@@ -216,7 +212,7 @@ export function bannerRevealWithContent() {
         "+=0.1",
       )
       .fromTo(
-        img,
+        media,
         { opacity: 0, scale: 1.05 },
         { opacity: 1, scale: 1, duration: 1, ease: "power2.out" },
         "-=0.4",
@@ -225,54 +221,50 @@ export function bannerRevealWithContent() {
     masterTl.add(tl, 0);
   });
 
-  // 2. Hero Content Animation (chạy sau banner)
+  // Hero content - RÚT NGẮN THỜI GIAN
   if (heroContent) {
+    gsap.set(heroContent, { visibility: "visible" });
+
     const title = heroContent.querySelector(".hero-title");
     const description = heroContent.querySelector(".hero-description");
     const michelin = heroContent.querySelector(".hero-list-michelin");
 
-    // Title - SplitText animation
     if (title) {
+      gsap.set(title, { opacity: 0 });
+
       const split = new SplitText(title, {
         type: "lines",
         linesClass: "line",
         mask: "lines",
       });
 
-      masterTl.fromTo(
-        split.lines,
-        {
-          opacity: 0,
-          y: 30,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          rotationX: 0,
-          duration: 0.4,
-          stagger: 0.02,
-          ease: "power2.out",
-        },
-      );
+      gsap.set(split.lines, { opacity: 0, y: 30 });
+      gsap.set(title, { opacity: 1 });
+
+      masterTl.to(split.lines, {
+        opacity: 1,
+        y: 0,
+        duration: 0.3, // Giảm từ 0.4 xuống 0.3
+        stagger: 0.01, // Giảm stagger từ 0.02 xuống 0.01
+        ease: "power2.out",
+      });
     }
 
-    // Description - Fade up
     if (description) {
       masterTl.fromTo(
         description,
         { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
-        "-=0.4",
+        { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, // Giảm từ 0.4 xuống 0.3
+        "-=0.2", // Overlap nhiều hơn (từ -0.4 lên -0.2)
       );
     }
 
-    // Michelin List - Fade up
     if (michelin) {
       masterTl.fromTo(
         michelin,
         { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
-        "-=0.6",
+        { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, // Giảm từ 0.4 xuống 0.3
+        "-=0.2", // Overlap nhiều hơn (từ -0.6 lên -0.2)
       );
     }
   }
