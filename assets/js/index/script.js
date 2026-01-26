@@ -80,3 +80,6 @@ if (footer) {
   const resizeObserver = new ResizeObserver(updateFooterHeight);
   resizeObserver.observe(footer);
 }
+MouseFollower.registerGSAP(gsap);
+
+const cursor = new MouseFollower();
