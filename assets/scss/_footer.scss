@@ -2,9 +2,9 @@
   background-color: var(--color-primary-2);
   .footer {
     &-container {
-      padding: 60px 0 32px;
+      padding-top: 60px;
       display: grid;
-      grid-template-columns: 3fr 7fr;
+      grid-template-columns: 204px auto;
       gap: 24px;
     }
     &-main {
@@ -96,9 +96,24 @@
         display: grid;
         grid-template-columns: 3fr 2fr 2fr;
         gap: 24px;
+        padding-left: calc(calc(1 / 12) * 100% + 48px);
       }
       &-bottom {
+        display: grid;
+        grid-template-columns: 204px auto;
+        gap: 24px;
+        padding-top: 24px;
+        padding-bottom: 32px;
+        .text-managed {
+          font-size: 12px;
+          line-height: 16px;
+          font-weight: 400;
+          color: var(--color-primary-1);
+          font-family: var(--font-body);
+          text-align: center;
+        }
         .text-copyright {
+          padding-left: calc(calc(1 / 12) * 100% + 48px);
           display: flex;
           align-items: center;
           gap: 4px;
