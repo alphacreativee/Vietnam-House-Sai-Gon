@@ -1,0 +1,128 @@
+#footer {
+  background-color: var(--color-primary-2);
+  .footer {
+    &-container {
+      padding: 60px 0 32px;
+      display: grid;
+      grid-template-columns: 3fr 7fr;
+      gap: 24px;
+    }
+    &-main {
+      &-col {
+        &.menu-col {
+          ul {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            li {
+              a {
+                font-family: var(--font-body);
+                font-size: 14px;
+                line-height: 23px;
+                color: var(--color-primary-1);
+              }
+            }
+          }
+        }
+        &.opening-hours {
+          .day-open {
+            font-family: var(--font-body);
+            font-size: 14px;
+            line-height: 23px;
+            color: var(--color-primary-1);
+            margin-bottom: 16px;
+          }
+          ul {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+          }
+          .opening-item {
+            .service,
+            .time {
+              font-family: var(--font-body);
+              font-size: 14px;
+              line-height: 23px;
+              color: var(--color-primary-1);
+            }
+          }
+        }
+        &.address-col {
+          .address-item {
+            ul {
+              li {
+                p,
+                a {
+                  font-family: var(--font-body);
+                  font-size: 14px;
+                  line-height: 23px;
+                  color: var(--color-primary-1);
+                }
+              }
+            }
+          }
+          .address-group {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            margin-bottom: 20px;
+          }
+          .social {
+            ul {
+              display: flex;
+              align-items: center;
+              gap: 12px;
+              li {
+                a {
+                  &:hover {
+                    svg {
+                      path {
+                        opacity: 0.7;
+                      }
+                    }
+                  }
+                  svg {
+                    path {
+                      transition: all 0.3s ease;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      &-top {
+        display: grid;
+        grid-template-columns: 3fr 2fr 2fr;
+        gap: 24px;
+      }
+      &-bottom {
+        .text-copyright {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          font-size: 12px;
+          line-height: 16px;
+          font-weight: 400;
+          color: var(--color-primary-1);
+          font-family: var(--font-body);
+          span {
+            font-size: 12px;
+            line-height: 16px;
+            font-weight: 400;
+            color: var(--color-primary-1);
+            font-family: var(--font-body);
+          }
+        }
+      }
+    }
+    &-title {
+      font-family: var(--font-body);
+      font-size: 14px;
+      line-height: 23px;
+      font-weight: bold;
+      color: var(--color-primary-1);
+    }
+  }
+}

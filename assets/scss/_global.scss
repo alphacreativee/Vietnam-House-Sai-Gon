@@ -1,0 +1,23 @@
+.line-hover {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    left: 1px;
+    bottom: -2px;
+    width: 0%;
+    height: 1px;
+    background-color: var(--color-primary-1);
+    transition: all 0.3s ease-in-out;
+  }
+  &.active {
+    &::before {
+      width: 100%;
+    }
+  }
+  &:hover {
+    &::before {
+      width: 100%;
+    }
+  }
+}
