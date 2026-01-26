@@ -166,3 +166,115 @@ export function createFilterTab() {
     });
   });
 }
+export function loading() {
+  if (!document.querySelector("#loading")) return;
+  const tl = gsap.timeline();
+  tl.fromTo(
+    "#loading",
+    {
+      clipPath: "inset(0% 0% 0% 0%)",
+    },
+    {
+      clipPath: "inset(0% 0% 100% 0%)",
+      duration: 1.25,
+      ease: "power2.inOut",
+    },
+  );
+
+  return tl;
+}
+export function bannerRevealWithContent() {
+  const elements = document.querySelectorAll(".reveal-element");
+  const heroContent = document.querySelector(".hero-content");
+
+  const masterTl = gsap.timeline();
+
+  // 1. Banner Reveal Animation
+  elements.forEach((element) => {
+    const overlay = element.querySelector(".reveal-overlay");
+    const img = element.querySelector("img");
+
+    // Set initial state - ẩn overlay ngay từ đầu
+    gsap.set(overlay, { scaleX: 0, transformOrigin: "left" });
+
+    const tl = gsap.timeline();
+
+    // Overlay chạy từ trái sang phải
+    tl.fromTo(
+      overlay,
+      { scaleX: 0, transformOrigin: "left" },
+      { scaleX: 1, duration: 0.6, ease: "power2.out" },
+    )
+      .to(
+        overlay,
+        {
+          scaleX: 0,
+          transformOrigin: "right",
+          duration: 0.6,
+          ease: "power2.inOut",
+        },
+        "+=0.1",
+      )
+      .fromTo(
+        img,
+        { opacity: 0, scale: 1.05 },
+        { opacity: 1, scale: 1, duration: 1, ease: "power2.out" },
+        "-=0.4",
+      );
+
+    masterTl.add(tl, 0);
+  });
+
+  // 2. Hero Content Animation (chạy sau banner)
+  if (heroContent) {
+    const title = heroContent.querySelector(".hero-title");
+    const description = heroContent.querySelector(".hero-description");
+    const michelin = heroContent.querySelector(".hero-list-michelin");
+
+    // Title - SplitText animation
+    if (title) {
+      const split = new SplitText(title, {
+        type: "lines",
+        linesClass: "line",
+        mask: "lines",
+      });
+
+      masterTl.fromTo(
+        split.lines,
+        {
+          opacity: 0,
+          y: 30,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          rotationX: 0,
+          duration: 0.4,
+          stagger: 0.02,
+          ease: "power2.out",
+        },
+      );
+    }
+
+    // Description - Fade up
+    if (description) {
+      masterTl.fromTo(
+        description,
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
+        "-=0.4",
+      );
+    }
+
+    // Michelin List - Fade up
+    if (michelin) {
+      masterTl.fromTo(
+        michelin,
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
+        "-=0.6",
+      );
+    }
+  }
+}
+export function revealBgPage() {}

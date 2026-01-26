@@ -90,7 +90,58 @@
     </script>
     <header id="header"></header>
     <!-- end header -->
-    <main></main>
+    <!-- loading -->
+    <script>
+      fetch("./components/loading.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("loading").innerHTML = data;
+        });
+    </script>
+    <div id="loading"></div>
+    <!-- end loading -->
+    <main>
+      <section class="hero">
+        <div class="hero-container">
+          <div class="hero-image-wrapper">
+            <div class="hero-image reveal-element">
+              <div class="reveal-overlay"></div>
+              <div class="image">
+                <img src="./assets/images/del/banner.webp" alt="" />
+              </div>
+            </div>
+          </div>
+          <div class="hero-content">
+            <div class="box-content">
+              <h2 class="hero-title h1-font color-black font-heading">
+                Brand Introduction
+              </h2>
+              <div class="hero-description b1-font color-black">
+                Lorem Ipsum is simply dummy text of the printing and typesetting
+                industry. Lorem Ipsum has been the industry's standard dummy
+                text ever since the 1500s, when an unknown printer took a galley
+                of type and scrambled it to make a type specimen book. It has
+                survived not only five centuries.
+              </div>
+              <div class="hero-list-michelin">
+                <ul class="d-flex align-items-center">
+                  <li>
+                    <div>
+                      <img src="./assets/images/del/michelin-1.svg" alt="" />
+                    </div>
+                  </li>
+                  <li>
+                    <div>
+                      <img src="./assets/images/del/michelin-2.svg" alt="" />
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
     <!-- layout -->
     <!-- footer -->
     <script>

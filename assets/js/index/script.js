@@ -3,6 +3,8 @@ import {
   customDropdown,
   createFilterTab,
   headerScroll,
+  loading,
+  bannerRevealWithContent,
 } from "../../main/js/global.min.js";
 ("use strict");
 $ = jQuery;
@@ -14,7 +16,19 @@ gsap.ticker.add((time) => {
 });
 
 gsap.ticker.lagSmoothing(0);
+document.addEventListener("DOMContentLoaded", () => {
+  const loadingElement = document.getElementById("loading");
 
+  if (loadingElement) {
+    loading()
+      .then(() => {
+        bannerRevealWithContent();
+      })
+      .catch((err) => console.error("Loading error:", err));
+  } else {
+    bannerRevealWithContent();
+  }
+});
 const init = () => {
   gsap.registerPlugin(ScrollTrigger);
   customDropdown();

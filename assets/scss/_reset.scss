@@ -90,6 +90,7 @@ body {
   text-rendering: optimizeLegibility !important;
   -webkit-font-smoothing: auto !important;
   -moz-osx-font-smoothing: grayscale !important;
+  font-family: var(--font-body);
 }
 main {
   min-height: 100vh;
