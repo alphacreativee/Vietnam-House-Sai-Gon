@@ -1,8 +1,26 @@
 :root {
-  --font-heading: "", sans-serif;
-  --font-body: "", sans-serif;
+  --font-heading: "Georgia", sans-serif;
+  --font-body: "SFU Futura", sans-serif;
   --color-black: #000000;
   --color-white: #ffffff;
+  --color-primary-1: #b58150;
+  --color-primary-2: #acdcd2;
+}
+
+.font-heading {
+  font-family: var(--font-heading);
+}
+
+.font-body {
+  font-family: var(--font-body);
+}
+
+.color-primary-1 {
+  color: var(--color-primary-1);
+}
+
+.color-primary-2 {
+  color: var(--color-primary-2);
 }
 
 .color-black {
@@ -17,6 +35,30 @@
   max-width: 1440px;
   width: 100%;
   margin: 0 auto;
+}
+
+.h1-font {
+  font-size: 54px;
+  line-height: 64px;
+  font-weight: 500;
+}
+
+.b1-font {
+  font-size: 16px;
+  line-height: 26px;
+  font-weight: 400;
+}
+
+.b2-font {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+}
+
+.h0-font {
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 500;
 }
 
 *,
