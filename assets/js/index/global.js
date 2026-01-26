@@ -192,6 +192,9 @@ export function bannerRevealWithContent() {
   elements.forEach((element) => {
     const overlay = element.querySelector(".reveal-overlay");
     const media = element.querySelector("img, video");
+
+    if (!overlay || !media) return;
+
     gsap.set(overlay, { scaleX: 0, transformOrigin: "left" });
 
     const tl = gsap.timeline();
@@ -218,16 +221,18 @@ export function bannerRevealWithContent() {
         "-=0.4",
       );
 
-    masterTl.add(tl, 0);
+    masterTl.add(tl, 0); // tất cả reveal cùng bắt đầu lúc 0
   });
 
-  // Hero content - RÚT NGẮN THỜI GIAN
+  // ── Hero content - delay ~0.9–1.0 giây (80% của reveal) ──
   if (heroContent) {
     gsap.set(heroContent, { visibility: "visible" });
 
     const title = heroContent.querySelector(".hero-title");
     const description = heroContent.querySelector(".hero-description");
     const michelin = heroContent.querySelector(".hero-list-michelin");
+
+    const heroStartTime = 0.9;
 
     if (title) {
       gsap.set(title, { opacity: 0 });
@@ -241,21 +246,25 @@ export function bannerRevealWithContent() {
       gsap.set(split.lines, { opacity: 0, y: 30 });
       gsap.set(title, { opacity: 1 });
 
-      masterTl.to(split.lines, {
-        opacity: 1,
-        y: 0,
-        duration: 0.3, // Giảm từ 0.4 xuống 0.3
-        stagger: 0.01, // Giảm stagger từ 0.02 xuống 0.01
-        ease: "power2.out",
-      });
+      masterTl.to(
+        split.lines,
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.3,
+          stagger: 0.01,
+          ease: "power2.out",
+        },
+        heroStartTime, // <--- delay chính
+      );
     }
 
     if (description) {
       masterTl.fromTo(
         description,
         { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, // Giảm từ 0.4 xuống 0.3
-        "-=0.2", // Overlap nhiều hơn (từ -0.4 lên -0.2)
+        { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" },
+        heroStartTime + (title ? 0.15 : 0), // overlap nhẹ nếu có title
       );
     }
 
@@ -263,10 +272,169 @@ export function bannerRevealWithContent() {
       masterTl.fromTo(
         michelin,
         { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, // Giảm từ 0.4 xuống 0.3
-        "-=0.2", // Overlap nhiều hơn (từ -0.6 lên -0.2)
+        { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" },
+        heroStartTime + (title ? 0.25 : 0.1), // xếp sau description tí
       );
     }
   }
+
+  // Optional: để debug thời gian
+  // masterTl.seek(0).play();
 }
 export function revealBgPage() {}
+export function chefSectionAnimation() {
+  const chefSection = document.querySelector(".chef");
+
+  if (!chefSection) return;
+
+  const chefContent = chefSection.querySelector(".chef-content");
+  const chefImageWrapper = chefSection.querySelector(".chef-image-wrapper");
+
+  const masterTl = gsap.timeline({
+    scrollTrigger: {
+      trigger: chefSection,
+      start: "top 60%",
+      toggleActions: "play none none none",
+      // markers: true,
+    },
+  });
+
+  // ── 1. Phần hình (reveal) - chạy trước ──
+  if (chefImageWrapper) {
+    const revealElement = chefImageWrapper.querySelector(
+      ".reveal-element-chef",
+    );
+    const img = revealElement?.querySelector("img");
+
+    if (revealElement && img) {
+      // Tạo overlay nếu chưa có
+      let overlay = revealElement.querySelector(".reveal-overlay");
+      if (!overlay) {
+        overlay = document.createElement("div");
+        overlay.className = "reveal-overlay overlay-blue"; // giữ class cũ của bạn
+        revealElement.appendChild(overlay);
+      }
+
+      // Set ban đầu: bắt đầu từ bên phải (scaleX: 0, origin right)
+      gsap.set(overlay, { scaleX: 0, transformOrigin: "right" });
+
+      // Timeline cho phần hình
+      masterTl
+        // 1. Overlay quét từ PHẢI → TRÁI (mở ra)
+        .fromTo(
+          overlay,
+          { scaleX: 0, transformOrigin: "right" },
+          { scaleX: 1, duration: 0.7, ease: "power3.out" }, // tăng nhẹ duration cho mượt
+          0, // bắt đầu ngay từ 0
+        )
+        // 2. Overlay rút từ TRÁI → PHẢI (đóng lại)
+        .to(
+          overlay,
+          {
+            scaleX: 0,
+            transformOrigin: "left",
+            duration: 0.7,
+            ease: "power2.inOut",
+          },
+          "+=0.08", // delay nhỏ trước khi rút
+        )
+        // 3. Hình ảnh hiện lên + scale nhẹ
+        .fromTo(
+          img,
+          { opacity: 0, scale: 1.06 },
+          { opacity: 1, scale: 1, duration: 1.1, ease: "power2.out" },
+          "-=0.5", // overlap nhiều hơn để hình hiện sớm
+        );
+    }
+  }
+
+  // ── 2. Phần nội dung text - delay để chạy sau hình một chút ──
+  if (chefContent) {
+    const title = chefContent.querySelector(".chef-title");
+    const description = chefContent.querySelector(".chef-description");
+    const button = chefContent.querySelector(".chef-button");
+
+    // Thời điểm text bắt đầu (sau khi hình đã reveal ~70-80%)
+    const textStart = 0.9; // ← chỉnh giá trị này: 0.7 = sớm hơn, 1.1 = chậm hơn
+
+    // Title
+    if (title) {
+      gsap.set(title, { opacity: 0 });
+
+      const split = new SplitText(title, {
+        type: "lines",
+        linesClass: "line",
+        mask: "lines",
+      });
+
+      gsap.set(split.lines, { opacity: 0, y: 30 });
+      gsap.set(title, { opacity: 1 });
+
+      masterTl.to(
+        split.lines,
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.35,
+          stagger: 0.015,
+          ease: "power2.out",
+        },
+        textStart,
+      );
+    }
+
+    // Description
+    if (description) {
+      masterTl.fromTo(
+        description,
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" },
+        textStart + (title ? 0.18 : 0), // overlap nhẹ nếu có title
+      );
+    }
+
+    // Button
+    if (button) {
+      gsap.set(button, { opacity: 0, y: 25 });
+
+      masterTl.to(
+        button,
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.45,
+          ease: "power2.out",
+        },
+        textStart + (title || description ? 0.3 : 0.15),
+      );
+    }
+  }
+
+  // masterTl.timeScale(0.8); // optional: làm chậm toàn bộ để xem rõ hơn khi test
+}
+
+// export function buttonGlobal() {
+//   const button = document.querySelector(".button-global");
+//   const text = button.querySelector("span");
+//   let split = new SplitText(text, { type: "chars", charsClass: "char" });
+//   button.addEventListener("mouseenter", () => {
+//     gsap.to(split.chars, {
+//       y: -30, // roll lên
+//       opacity: 0,
+//       stagger: 0.03, // từng ký tự chậm 0.03s
+//       duration: 0.4,
+//       ease: "power3.out",
+//     });
+//   });
+
+//   button.addEventListener("mouseleave", () => {
+//     gsap.to(split.chars, {
+//       y: 0,
+//       opacity: 1,
+//       stagger: 0.02,
+//       duration: 0.4,
+//       ease: "power3.in",
+//     });
+//   });
+// }

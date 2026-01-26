@@ -5,6 +5,7 @@ import {
   headerScroll,
   loading,
   bannerRevealWithContent,
+  chefSectionAnimation,
 } from "../../main/js/global.min.js";
 ("use strict");
 $ = jQuery;
@@ -34,6 +35,7 @@ const init = () => {
   customDropdown();
   createFilterTab();
   headerScroll();
+  chefSectionAnimation();
 };
 preloadImages("img").then(() => {
   init();
