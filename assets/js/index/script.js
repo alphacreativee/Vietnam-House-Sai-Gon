@@ -6,6 +6,7 @@ import {
   loading,
   bannerRevealWithContent,
   chefSectionAnimation,
+  menuGalleryReveal,
 } from "../../main/js/global.min.js";
 ("use strict");
 $ = jQuery;
@@ -36,6 +37,7 @@ const init = () => {
   createFilterTab();
   headerScroll();
   chefSectionAnimation();
+  menuGalleryReveal();
 };
 preloadImages("img").then(() => {
   init();
@@ -59,3 +61,22 @@ window.addEventListener("beforeunload", () => {
   if (!isLinkClicked) window.scrollTo(0, 0);
   isLinkClicked = false;
 });
+
+const footer = document.querySelector("footer");
+
+if (footer) {
+  const updateFooterHeight = () => {
+    const height = footer.offsetHeight;
+    console.log("Footer height hiện tại:", height, "px");
+
+    document.documentElement.style.setProperty(
+      "--footer-height",
+      `${height}px`,
+    );
+  };
+
+  updateFooterHeight();
+
+  const resizeObserver = new ResizeObserver(updateFooterHeight);
+  resizeObserver.observe(footer);
+}

@@ -94,4 +94,10 @@ body {
 }
 main {
   min-height: 100vh;
+  margin-bottom: var(--footer-height);
+}
+section {
+  position: relative;
+  z-index: 4;
+  background-color: var(--color-white);
 }

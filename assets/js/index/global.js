@@ -299,7 +299,7 @@ export function chefSectionAnimation() {
     },
   });
 
-  // ── 1. Phần hình (reveal) - chạy trước ──
+  // ── 1. Phần hình (reveal từ TRÁI → PHẢI) - chạy trước ──
   if (chefImageWrapper) {
     const revealElement = chefImageWrapper.querySelector(
       ".reveal-element-chef",
@@ -311,39 +311,39 @@ export function chefSectionAnimation() {
       let overlay = revealElement.querySelector(".reveal-overlay");
       if (!overlay) {
         overlay = document.createElement("div");
-        overlay.className = "reveal-overlay overlay-blue"; // giữ class cũ của bạn
+        overlay.className = "reveal-overlay"; // thêm class màu nếu cần: overlay-blue, overlay-dark...
         revealElement.appendChild(overlay);
       }
 
-      // Set ban đầu: bắt đầu từ bên phải (scaleX: 0, origin right)
-      gsap.set(overlay, { scaleX: 0, transformOrigin: "right" });
+      // Set ban đầu
+      gsap.set(overlay, { scaleX: 0, transformOrigin: "left" });
 
       // Timeline cho phần hình
       masterTl
-        // 1. Overlay quét từ PHẢI → TRÁI (mở ra)
+        // 1. Overlay quét từ TRÁI → PHẢI (mở ra)
         .fromTo(
           overlay,
-          { scaleX: 0, transformOrigin: "right" },
-          { scaleX: 1, duration: 0.7, ease: "power3.out" }, // tăng nhẹ duration cho mượt
-          0, // bắt đầu ngay từ 0
+          { scaleX: 0, transformOrigin: "left" },
+          { scaleX: 1, duration: 0.5, ease: "power3.out" }, // duration ngắn gọn, mạnh mẽ
+          0,
         )
-        // 2. Overlay rút từ TRÁI → PHẢI (đóng lại)
+        // 2. Overlay rút từ PHẢI → TRÁI (đóng lại)
         .to(
           overlay,
           {
             scaleX: 0,
-            transformOrigin: "left",
-            duration: 0.7,
+            transformOrigin: "right", // ← quan trọng: đổi origin sang right để rút ngược
+            duration: 0.6,
             ease: "power2.inOut",
           },
-          "+=0.08", // delay nhỏ trước khi rút
+          "+=0.1", // delay nhẹ trước khi rút
         )
         // 3. Hình ảnh hiện lên + scale nhẹ
         .fromTo(
           img,
-          { opacity: 0, scale: 1.06 },
-          { opacity: 1, scale: 1, duration: 1.1, ease: "power2.out" },
-          "-=0.5", // overlap nhiều hơn để hình hiện sớm
+          { opacity: 0, scale: 1.05 },
+          { opacity: 1, scale: 1, duration: 1.0, ease: "power2.out" },
+          "-=0.5", // overlap để hình hiện sớm, mượt
         );
     }
   }
@@ -354,8 +354,8 @@ export function chefSectionAnimation() {
     const description = chefContent.querySelector(".chef-description");
     const button = chefContent.querySelector(".chef-button");
 
-    // Thời điểm text bắt đầu (sau khi hình đã reveal ~70-80%)
-    const textStart = 0.9; // ← chỉnh giá trị này: 0.7 = sớm hơn, 1.1 = chậm hơn
+    // Thời điểm text bắt đầu (sau khi hình reveal ~70–80%)
+    const textStart = 0.9; // ← 0.7 = sớm hơn, 1.1 = chậm hơn, 0.9 thường tự nhiên
 
     // Title
     if (title) {
@@ -364,7 +364,6 @@ export function chefSectionAnimation() {
       const split = new SplitText(title, {
         type: "lines",
         linesClass: "line",
-        mask: "lines",
       });
 
       gsap.set(split.lines, { opacity: 0, y: 30 });
@@ -389,11 +388,11 @@ export function chefSectionAnimation() {
         description,
         { opacity: 0, y: 30 },
         { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" },
-        textStart + (title ? 0.18 : 0), // overlap nhẹ nếu có title
+        textStart + (title ? 0.18 : 0),
       );
     }
 
-    // Button
+    // Button (bỏ scale nếu không cần, hoặc giữ nhẹ)
     if (button) {
       gsap.set(button, { opacity: 0, y: 25 });
 
@@ -402,7 +401,6 @@ export function chefSectionAnimation() {
         {
           opacity: 1,
           y: 0,
-          scale: 1,
           duration: 0.45,
           ease: "power2.out",
         },
@@ -411,30 +409,75 @@ export function chefSectionAnimation() {
     }
   }
 
-  // masterTl.timeScale(0.8); // optional: làm chậm toàn bộ để xem rõ hơn khi test
+  // masterTl.timeScale(0.7); // uncomment để chậm lại khi test
 }
 
-// export function buttonGlobal() {
-//   const button = document.querySelector(".button-global");
-//   const text = button.querySelector("span");
-//   let split = new SplitText(text, { type: "chars", charsClass: "char" });
-//   button.addEventListener("mouseenter", () => {
-//     gsap.to(split.chars, {
-//       y: -30, // roll lên
-//       opacity: 0,
-//       stagger: 0.03, // từng ký tự chậm 0.03s
-//       duration: 0.4,
-//       ease: "power3.out",
-//     });
-//   });
+export function menuGalleryReveal() {
+  const galleryItems = document.querySelectorAll(
+    ".menu-gallery-item.reveal-element-stagger",
+  );
 
-//   button.addEventListener("mouseleave", () => {
-//     gsap.to(split.chars, {
-//       y: 0,
-//       opacity: 1,
-//       stagger: 0.02,
-//       duration: 0.4,
-//       ease: "power3.in",
-//     });
-//   });
-// }
+  if (!galleryItems.length) return;
+
+  // Tạo master timeline với ScrollTrigger
+  const masterTl = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".menu-gallery-list",
+      start: "top 80%", // bắt đầu khi top của list cách viewport 80%
+      toggleActions: "play none none none",
+      // markers: true,           // bật khi debug
+    },
+  });
+
+  galleryItems.forEach((item, index) => {
+    const overlay = item.querySelector(".reveal-overlay");
+    const img = item.querySelector(".image img");
+
+    if (!overlay || !img) return;
+
+    // Set initial state
+    gsap.set(overlay, {
+      scaleX: 0,
+      transformOrigin: "left", // bắt đầu từ trái
+    });
+
+    // Tạo sub-timeline cho từng item
+    const tl = gsap.timeline();
+
+    tl
+      // 1. Overlay quét từ TRÁI → PHẢI (mở ra, reveal hình)
+      .fromTo(
+        overlay,
+        { scaleX: 0, transformOrigin: "left" },
+        {
+          scaleX: 1,
+          duration: 0.6,
+          ease: "power3.out",
+        },
+      )
+      // 2. Overlay rút từ PHẢI → TRÁI (đóng lại, để lộ hình hoàn toàn)
+      .to(
+        overlay,
+        {
+          scaleX: 0,
+          transformOrigin: "right", // rút ngược từ phải
+          duration: 0.6,
+          ease: "power2.inOut",
+        },
+        "+=0.1", // delay nhỏ để hình lộ ra tí trước khi rút
+      )
+      // 3. Hình ảnh scale nhẹ + fade in (tăng độ mượt)
+      .fromTo(
+        img,
+        { opacity: 0, scale: 1.05 },
+        { opacity: 1, scale: 1, duration: 1.0, ease: "power2.out" },
+        "-=0.6", // overlap mạnh để hình hiện sớm
+      );
+
+    // Add sub-timeline vào master với stagger (từ trái sang phải)
+    masterTl.add(tl, index * 0.15); // stagger 0.15s mỗi item → chỉnh nhỏ hơn nếu muốn nhanh
+  });
+
+  // Optional: làm chậm để test
+  // masterTl.timeScale(0.7);
+}

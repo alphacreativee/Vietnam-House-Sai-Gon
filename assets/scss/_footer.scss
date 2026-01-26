@@ -1,5 +1,10 @@
 #footer {
   background-color: var(--color-primary-2);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: var(--footer-height);
   .footer {
     &-container {
       padding-top: 60px;
@@ -77,7 +82,16 @@
                   &:hover {
                     svg {
                       path {
-                        opacity: 0.7;
+                        stroke: var(--color-black);
+                      }
+                    }
+                  }
+                  &.hover-stroke-fill {
+                    &:hover {
+                      svg {
+                        path {
+                          fill: var(--color-black);
+                        }
                       }
                     }
                   }
