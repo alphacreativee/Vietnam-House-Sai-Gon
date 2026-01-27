@@ -698,7 +698,7 @@ export function bannerWithOutHome() {
         ? {
             scrollTrigger: {
               trigger: section,
-              start: "top 70%",
+              start: "top 65%",
               toggleActions: "play none none none",
               // markers: true,
             },
@@ -754,5 +754,149 @@ export function changeBackgroundColor() {
         main.classList.remove("active");
       }
     },
+  });
+}
+export function swiperLocation() {
+  if (!document.querySelector(".swiper-location")) return;
+
+  const swiper = new Swiper(".swiper-location", {
+    slidesPerView: 3,
+    spaceBetween: 30,
+    // loop: true,
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+  });
+
+  const tag = document.querySelector(".all-location .tag");
+  const locationItems = document.querySelectorAll(
+    ".all-location .location-item",
+  );
+
+  if (!locationItems.length) return;
+
+  // Animate tag trước
+  if (tag) {
+    gsap.set(tag, {
+      opacity: 0,
+      y: 20,
+    });
+
+    gsap
+      .timeline({
+        scrollTrigger: {
+          trigger: ".all-location",
+          start: "top 80%",
+          toggleActions: "play none none none",
+        },
+      })
+      .to(tag, {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        ease: "power2.out",
+      });
+  }
+
+  // Animate location items
+  locationItems.forEach((item, index) => {
+    const revealElement = item.querySelector(".reveal-element-stagger");
+    const overlay = revealElement?.querySelector(".reveal-overlay");
+    const img = revealElement?.querySelector(".image img");
+    const h4 = item.querySelector(".location-content h4");
+    const desc = item.querySelector(".location-content .desc");
+    const button = item.querySelector(".location-content .button");
+
+    if (!overlay || !img || !h4 || !desc || !button) return;
+
+    // Set initial state
+    gsap.set(overlay, {
+      scaleX: 0,
+      transformOrigin: "left",
+    });
+
+    gsap.set([h4, desc, button], {
+      opacity: 0,
+      y: 20,
+    });
+
+    // Timeline với ScrollTrigger - delay để tag chạy trước
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: item,
+        start: "top 70%",
+        toggleActions: "play none none none",
+        // markers: true,
+      },
+      delay: 0.3, // Delay để tag có thời gian chạy trước
+    });
+
+    tl
+      // 1. Overlay quét từ TRÁI → PHẢI (0.6s)
+      .fromTo(
+        overlay,
+        { scaleX: 0, transformOrigin: "left" },
+        {
+          scaleX: 1,
+          duration: 0.6,
+          ease: "power3.out",
+        },
+      )
+      // 2. Overlay rút từ PHẢI → TRÁI (0.6s)
+      .to(
+        overlay,
+        {
+          scaleX: 0,
+          transformOrigin: "right",
+          duration: 0.6,
+          ease: "power2.inOut",
+        },
+        "+=0.1",
+      )
+      // 3. Hình ảnh scale nhẹ + fade in
+      .fromTo(
+        img,
+        { opacity: 0, scale: 1.05 },
+        { opacity: 1, scale: 1, duration: 1.0, ease: "power2.out" },
+        "-=0.6",
+      )
+      // 4. H4 fade in
+      .to(
+        h4,
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power2.out",
+        },
+        0.9,
+      )
+      // 5. Desc fade in + slide up
+      .to(
+        desc,
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power2.out",
+        },
+        "-=0.4",
+      )
+      // 6. Button fade in + slide up
+      .to(
+        button,
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power2.out",
+        },
+        "-=0.4",
+      );
   });
 }

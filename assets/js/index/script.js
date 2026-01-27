@@ -12,6 +12,7 @@ import {
   mousetail,
   bannerWithOutHome,
   changeBackgroundColor,
+  swiperLocation,
 } from "../../main/js/global.min.js";
 ("use strict");
 $ = jQuery;
@@ -48,6 +49,7 @@ const init = () => {
   cursor();
   ctaRun();
   mousetail();
+  swiperLocation();
 };
 preloadImages("img").then(() => {
   init();
