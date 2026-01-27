@@ -751,17 +751,19 @@ export function changeBackgroundColor() {
   const main = document.querySelector("main.change-background-color");
   if (!main) return;
 
+  gsap.set(main, { backgroundColor: "#acdcd2" });
+
+  // Tạo hiệu ứng tan dần
   gsap.to(main, {
     backgroundColor: "#ffffff",
-    duration: 0.8,
-    ease: "none",
+    ease: "sine.inOut",
     scrollTrigger: {
       trigger: "body",
       start: "top top",
-      end: "+=240",
-      scrub: 0.8,
-      // markers: true,
+      end: "+=180",
+      scrub: 1.1,
       invalidateOnRefresh: true,
+      anticipatePin: 1,
     },
   });
 }
