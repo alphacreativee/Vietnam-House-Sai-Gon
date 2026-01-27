@@ -38,6 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
     bannerRevealWithContent();
     bannerWithOutHome();
     changeBackgroundColor();
+    swiperLocation();
   }
 });
 const init = () => {
@@ -50,7 +51,6 @@ const init = () => {
   cursor();
   ctaRun();
   mousetail();
-  swiperLocation();
   unionSectionAnimation();
 };
 preloadImages("img").then(() => {
