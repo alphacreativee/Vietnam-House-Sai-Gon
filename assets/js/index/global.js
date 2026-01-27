@@ -751,20 +751,17 @@ export function changeBackgroundColor() {
   const main = document.querySelector("main.change-background-color");
   if (!main) return;
 
-  gsap.registerPlugin(ScrollTrigger);
-
-  ScrollTrigger.create({
-    trigger: "body",
-    start: "top top",
-    end: "bottom bottom",
-    // markers: true,
-    onUpdate: () => {
-      const scrollThreshold = window.innerHeight * 0.4;
-      if (window.scrollY > 120) {
-        main.classList.add("active");
-      } else {
-        main.classList.remove("active");
-      }
+  gsap.to(main, {
+    backgroundColor: "#ffffff",
+    duration: 0.8,
+    ease: "none",
+    scrollTrigger: {
+      trigger: "body",
+      start: "top top",
+      end: "+=240",
+      scrub: 0.8,
+      // markers: true,
+      invalidateOnRefresh: true,
     },
   });
 }

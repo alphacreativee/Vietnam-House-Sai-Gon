@@ -98,11 +98,8 @@ main {
   position: relative;
   z-index: 4;
   background-color: var(--color-white);
-  transition: background-color 0.3s ease;
+  transition: background-color 0.8s ease-in-out;
   &.change-background-color {
     background-color: var(--color-primary-2);
-    &.active {
-      background-color: var(--color-white);
-    }
   }
 }
