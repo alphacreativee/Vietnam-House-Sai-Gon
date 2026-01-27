@@ -95,9 +95,14 @@ body {
 main {
   min-height: 100vh;
   margin-bottom: var(--footer-height);
-}
-section {
   position: relative;
   z-index: 4;
   background-color: var(--color-white);
+  transition: background-color 0.3s ease;
+  &.change-background-color {
+    background-color: var(--color-primary-2);
+    &.active {
+      background-color: var(--color-white);
+    }
+  }
 }

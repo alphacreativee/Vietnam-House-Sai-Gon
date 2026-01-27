@@ -11,6 +11,7 @@ import {
   ctaRun,
   mousetail,
   bannerWithOutHome,
+  changeBackgroundColor,
 } from "../../main/js/global.min.js";
 ("use strict");
 $ = jQuery;
@@ -34,6 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
   } else {
     bannerRevealWithContent();
     bannerWithOutHome();
+    changeBackgroundColor();
   }
 });
 const init = () => {

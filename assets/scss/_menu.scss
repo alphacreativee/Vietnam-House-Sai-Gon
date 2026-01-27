@@ -41,6 +41,7 @@
     }
   }
   &.column-layout-2 {
+    padding-bottom: 80px;
     .menu-gallery-list {
       grid-template-columns: 1fr 1fr 1fr 1fr;
     }

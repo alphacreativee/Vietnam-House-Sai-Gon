@@ -412,6 +412,78 @@ export function chefSectionAnimation() {
   // masterTl.timeScale(0.7); // uncomment để chậm lại khi test
 }
 
+// export function menuGalleryReveal() {
+//   const galleryLists = document.querySelectorAll(".menu-gallery-list");
+
+//   if (!galleryLists.length) return;
+
+//   galleryLists.forEach((list) => {
+//     const galleryItems = list.querySelectorAll(
+//       ".menu-gallery-item.reveal-element-stagger",
+//     );
+
+//     if (!galleryItems.length) return;
+
+//     // Tạo master timeline với ScrollTrigger cho từng list
+//     const masterTl = gsap.timeline({
+//       scrollTrigger: {
+//         trigger: list,
+//         start: "top 80%",
+//         toggleActions: "play none none none",
+//         // markers: true,
+//       },
+//     });
+
+//     galleryItems.forEach((item, index) => {
+//       const overlay = item.querySelector(".reveal-overlay");
+//       const img = item.querySelector(".image img");
+
+//       if (!overlay || !img) return;
+
+//       // Set initial state
+//       gsap.set(overlay, {
+//         scaleX: 0,
+//         transformOrigin: "left",
+//       });
+
+//       // Tạo sub-timeline cho từng item
+//       const tl = gsap.timeline();
+
+//       tl
+//         // 1. Overlay quét từ TRÁI → PHẢI
+//         .fromTo(
+//           overlay,
+//           { scaleX: 0, transformOrigin: "left" },
+//           {
+//             scaleX: 1,
+//             duration: 0.6,
+//             ease: "power3.out",
+//           },
+//         )
+//         // 2. Overlay rút từ PHẢI → TRÁI
+//         .to(
+//           overlay,
+//           {
+//             scaleX: 0,
+//             transformOrigin: "right",
+//             duration: 0.6,
+//             ease: "power2.inOut",
+//           },
+//           "+=0.1",
+//         )
+//         // 3. Hình ảnh scale nhẹ + fade in
+//         .fromTo(
+//           img,
+//           { opacity: 0, scale: 1.05 },
+//           { opacity: 1, scale: 1, duration: 1.0, ease: "power2.out" },
+//           "-=0.6",
+//         );
+
+//       // Add sub-timeline vào master với stagger
+//       masterTl.add(tl, index * 0.15);
+//     });
+//   });
+// }
 export function menuGalleryReveal() {
   const galleryItems = document.querySelectorAll(
     ".menu-gallery-item.reveal-element-stagger",
@@ -419,69 +491,54 @@ export function menuGalleryReveal() {
 
   if (!galleryItems.length) return;
 
-  // Tạo master timeline với ScrollTrigger
-  const masterTl = gsap.timeline({
-    scrollTrigger: {
-      trigger: ".menu-gallery-list",
-      start: "top 80%", // bắt đầu khi top của list cách viewport 80%
-      toggleActions: "play none none none",
-      // markers: true,           // bật khi debug
-    },
-  });
-
-  galleryItems.forEach((item, index) => {
+  galleryItems.forEach((item) => {
     const overlay = item.querySelector(".reveal-overlay");
     const img = item.querySelector(".image img");
 
     if (!overlay || !img) return;
 
-    // Set initial state
     gsap.set(overlay, {
       scaleX: 0,
-      transformOrigin: "left", // bắt đầu từ trái
+      transformOrigin: "left",
     });
 
-    // Tạo sub-timeline cho từng item
-    const tl = gsap.timeline();
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: item,
+        start: "top 70%",
+        toggleActions: "play none none none",
+      },
+    });
 
-    tl
-      // 1. Overlay quét từ TRÁI → PHẢI (mở ra, reveal hình)
-      .fromTo(
-        overlay,
-        { scaleX: 0, transformOrigin: "left" },
-        {
-          scaleX: 1,
-          duration: 0.6,
-          ease: "power3.out",
-        },
-      )
-      // 2. Overlay rút từ PHẢI → TRÁI (đóng lại, để lộ hình hoàn toàn)
+    tl.fromTo(
+      overlay,
+      { scaleX: 0, transformOrigin: "left" },
+      {
+        scaleX: 1,
+        duration: 0.6,
+        ease: "power3.out",
+      },
+    )
+
       .to(
         overlay,
         {
           scaleX: 0,
-          transformOrigin: "right", // rút ngược từ phải
+          transformOrigin: "right",
           duration: 0.6,
           ease: "power2.inOut",
         },
-        "+=0.1", // delay nhỏ để hình lộ ra tí trước khi rút
+        "+=0.1",
       )
-      // 3. Hình ảnh scale nhẹ + fade in (tăng độ mượt)
+
       .fromTo(
         img,
         { opacity: 0, scale: 1.05 },
         { opacity: 1, scale: 1, duration: 1.0, ease: "power2.out" },
-        "-=0.6", // overlap mạnh để hình hiện sớm
+        "-=0.6",
       );
-
-    // Add sub-timeline vào master với stagger (từ trái sang phải)
-    masterTl.add(tl, index * 0.15); // stagger 0.15s mỗi item → chỉnh nhỏ hơn nếu muốn nhanh
   });
-
-  // Optional: làm chậm để test
-  // masterTl.timeScale(0.7);
 }
-
 export function cursor() {
   MouseFollower.registerGSAP(gsap);
 
@@ -620,45 +677,81 @@ export function mousetail() {
   }
 }
 export function bannerWithOutHome() {
-  const section = document.querySelector(".banner-description");
-  if (!section) return;
+  const sections = document.querySelectorAll(".banner-description"); // Đổi thành querySelectorAll
+  if (!sections.length) return;
 
-  // Set trạng thái ban đầu
-  gsap.set(
-    ".banner-description .tag, .banner-description .description, .banner-description .button",
-    {
+  gsap.registerPlugin(ScrollTrigger);
+
+  sections.forEach((section) => {
+    // Set trạng thái ban đầu cho từng section
+    gsap.set(section.querySelectorAll(".tag, .description, .button"), {
       opacity: 0,
       y: 20,
-    },
-  );
+    });
 
-  const timeline = gsap.timeline();
+    // Check nếu có class scroll-trigger
+    const hasScrollTrigger = section.classList.contains("scroll-trigger");
 
-  timeline
-    .to(".banner-description .tag", {
-      opacity: 1,
-      y: 0,
-      duration: 0.4,
-      ease: "power2.out",
-    })
-    .to(
-      ".banner-description .description",
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.4,
-        ease: "power2.out",
-      },
-      "-=0.2",
-    )
-    .to(
-      ".banner-description .button",
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.4,
-        ease: "power2.out",
-      },
-      "-=0.2",
+    const timeline = gsap.timeline(
+      hasScrollTrigger
+        ? {
+            scrollTrigger: {
+              trigger: section,
+              start: "top 70%",
+              toggleActions: "play none none none",
+              markers: true,
+            },
+          }
+        : {},
     );
+
+    timeline
+      .to(section.querySelector(".tag"), {
+        opacity: 1,
+        y: 0,
+        duration: 0.4,
+        ease: "power2.out",
+      })
+      .to(
+        section.querySelector(".description"),
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.4,
+          ease: "power2.out",
+        },
+        "-=0.2",
+      )
+      .to(
+        section.querySelector(".button"),
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.4,
+          ease: "power2.out",
+        },
+        "-=0.2",
+      );
+  });
+}
+export function changeBackgroundColor() {
+  const main = document.querySelector("main.change-background-color");
+  if (!main) return;
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  ScrollTrigger.create({
+    trigger: "body",
+    start: "top top",
+    end: "bottom bottom",
+    // markers: true,
+    onUpdate: () => {
+      const scrollThreshold = window.innerHeight * 0.4;
+      if (window.scrollY > 120) {
+        main.classList.add("active");
+      } else {
+        main.classList.remove("active");
+      }
+    },
+  });
 }

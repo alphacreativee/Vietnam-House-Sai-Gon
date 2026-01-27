@@ -34,7 +34,11 @@
   position: relative;
   overflow: hidden;
   background-color: var(--color-primary-1);
-
+  &.background-black {
+    &:after {
+      background-color: var(--color-black);
+    }
+  }
   span {
     overflow: hidden;
     display: block;

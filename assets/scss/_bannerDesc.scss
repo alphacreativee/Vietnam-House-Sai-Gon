@@ -6,6 +6,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-top: 62px;
+  //   padding-bottom: 120px;
+  &.scroll-trigger {
+    padding-top: 0;
+    padding-bottom: 80px;
+    height: auto;
+  }
   &-box {
     max-width: 50%;
     width: 100%;
@@ -18,7 +25,7 @@
       opacity: 0;
     }
     .tag-animation {
-      font-weight: 900;
+      font-weight: 500;
       line-height: 62px;
       position: relative;
       text-align: center;
