@@ -8,6 +8,7 @@ import {
   chefSectionAnimation,
   menuGalleryReveal,
   cursor,
+  ctaRun,
 } from "../../main/js/global.min.js";
 ("use strict");
 $ = jQuery;
@@ -40,6 +41,7 @@ const init = () => {
   chefSectionAnimation();
   menuGalleryReveal();
   cursor();
+  ctaRun();
 };
 preloadImages("img").then(() => {
   init();

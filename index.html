@@ -105,7 +105,16 @@
     </script>
     <div id="loading"></div>
     <!-- end loading -->
-
+    <!-- cta -->
+    <script>
+      fetch("./components/cta.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("cta").innerHTML = data;
+        });
+    </script>
+    <div id="cta"></div>
+    <!-- end cta -->
     <main>
       <section class="hero">
         <div class="hero-container">

@@ -487,3 +487,22 @@ export function cursor() {
 
   const cursor = new MouseFollower();
 }
+export function ctaRun() {
+  const cta = document.getElementById("cta");
+  if (!cta) return;
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const isShortPage = () => document.body.scrollHeight <= window.innerHeight;
+
+  ScrollTrigger.create({
+    trigger: "body",
+    start: "top top",
+    end: "bottom bottom",
+    onUpdate: (self) => {
+      if (!isShortPage()) {
+        cta.classList.toggle("run-right", self.direction === 1);
+      }
+    },
+  });
+}
