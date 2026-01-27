@@ -221,7 +221,7 @@ export function bannerRevealWithContent() {
         "-=0.4",
       );
 
-    masterTl.add(tl, 0); // tất cả reveal cùng bắt đầu lúc 0
+    masterTl.add(tl, 0);
   });
 
   // ── Hero content - delay ~0.9–1.0 giây (80% của reveal) ──
@@ -243,7 +243,7 @@ export function bannerRevealWithContent() {
         mask: "lines",
       });
 
-      gsap.set(split.lines, { opacity: 0, y: 30 });
+      gsap.set(split.lines, { opacity: 0, y: 50 }); // Tăng y từ 30 lên 50
       gsap.set(title, { opacity: 1 });
 
       masterTl.to(
@@ -251,35 +251,42 @@ export function bannerRevealWithContent() {
         {
           opacity: 1,
           y: 0,
-          duration: 0.3,
-          stagger: 0.01,
-          ease: "power2.out",
+          duration: 0.8, // Tăng duration từ 0.3 lên 0.8
+          stagger: 0.05, // Tăng stagger từ 0.01 lên 0.05
+          ease: "power1.out", // Đổi ease nhẹ nhàng hơn
         },
-        heroStartTime, // <--- delay chính
+        heroStartTime,
       );
     }
 
     if (description) {
       masterTl.fromTo(
         description,
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" },
-        heroStartTime + (title ? 0.15 : 0), // overlap nhẹ nếu có title
+        { opacity: 0, y: 50 }, // Tăng y từ 30 lên 50
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8, // Tăng duration từ 0.3 lên 0.8
+          ease: "power1.out", // Đổi ease nhẹ nhàng hơn
+        },
+        heroStartTime + (title ? 0.3 : 0), // Tăng overlap từ 0.15 lên 0.3
       );
     }
 
     if (michelin) {
       masterTl.fromTo(
         michelin,
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" },
-        heroStartTime + (title ? 0.25 : 0.1), // xếp sau description tí
+        { opacity: 0, y: 50 }, // Tăng y từ 30 lên 50
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8, // Tăng duration từ 0.3 lên 0.8
+          ease: "power1.out", // Đổi ease nhẹ nhàng hơn
+        },
+        heroStartTime + (title ? 0.5 : 0.2), // Tăng overlap từ 0.25 lên 0.5
       );
     }
   }
-
-  // Optional: để debug thời gian
-  // masterTl.seek(0).play();
 }
 export function revealBgPage() {}
 export function chefSectionAnimation() {
@@ -311,7 +318,7 @@ export function chefSectionAnimation() {
       let overlay = revealElement.querySelector(".reveal-overlay");
       if (!overlay) {
         overlay = document.createElement("div");
-        overlay.className = "reveal-overlay"; // thêm class màu nếu cần: overlay-blue, overlay-dark...
+        overlay.className = "reveal-overlay";
         revealElement.appendChild(overlay);
       }
 
@@ -324,7 +331,7 @@ export function chefSectionAnimation() {
         .fromTo(
           overlay,
           { scaleX: 0, transformOrigin: "left" },
-          { scaleX: 1, duration: 0.5, ease: "power3.out" }, // duration ngắn gọn, mạnh mẽ
+          { scaleX: 1, duration: 0.5, ease: "power3.out" },
           0,
         )
         // 2. Overlay rút từ PHẢI → TRÁI (đóng lại)
@@ -332,18 +339,18 @@ export function chefSectionAnimation() {
           overlay,
           {
             scaleX: 0,
-            transformOrigin: "right", // ← quan trọng: đổi origin sang right để rút ngược
+            transformOrigin: "right",
             duration: 0.6,
             ease: "power2.inOut",
           },
-          "+=0.1", // delay nhẹ trước khi rút
+          "+=0.1",
         )
         // 3. Hình ảnh hiện lên + scale nhẹ
         .fromTo(
           img,
           { opacity: 0, scale: 1.05 },
           { opacity: 1, scale: 1, duration: 1.0, ease: "power2.out" },
-          "-=0.5", // overlap để hình hiện sớm, mượt
+          "-=0.5",
         );
     }
   }
@@ -355,7 +362,7 @@ export function chefSectionAnimation() {
     const button = chefContent.querySelector(".chef-button");
 
     // Thời điểm text bắt đầu (sau khi hình reveal ~70–80%)
-    const textStart = 0.9; // ← 0.7 = sớm hơn, 1.1 = chậm hơn, 0.9 thường tự nhiên
+    const textStart = 0.9;
 
     // Title
     if (title) {
@@ -366,7 +373,7 @@ export function chefSectionAnimation() {
         linesClass: "line",
       });
 
-      gsap.set(split.lines, { opacity: 0, y: 30 });
+      gsap.set(split.lines, { opacity: 0, y: 50 }); // Tăng y từ 30 lên 50
       gsap.set(title, { opacity: 1 });
 
       masterTl.to(
@@ -374,9 +381,9 @@ export function chefSectionAnimation() {
         {
           opacity: 1,
           y: 0,
-          duration: 0.35,
-          stagger: 0.015,
-          ease: "power2.out",
+          duration: 0.8, // Tăng duration từ 0.35 lên 0.8
+          stagger: 0.05, // Tăng stagger từ 0.015 lên 0.05
+          ease: "power1.out", // Đổi ease nhẹ nhàng hơn
         },
         textStart,
       );
@@ -386,25 +393,30 @@ export function chefSectionAnimation() {
     if (description) {
       masterTl.fromTo(
         description,
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" },
-        textStart + (title ? 0.18 : 0),
+        { opacity: 0, y: 50 }, // Tăng y từ 30 lên 50
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8, // Tăng duration từ 0.35 lên 0.8
+          ease: "power1.out", // Đổi ease nhẹ nhàng hơn
+        },
+        textStart + (title ? 0.3 : 0), // Tăng overlap từ 0.18 lên 0.3
       );
     }
 
-    // Button (bỏ scale nếu không cần, hoặc giữ nhẹ)
+    // Button
     if (button) {
-      gsap.set(button, { opacity: 0, y: 25 });
+      gsap.set(button, { opacity: 0, y: 50 }); // Tăng y từ 25 lên 50
 
       masterTl.to(
         button,
         {
           opacity: 1,
           y: 0,
-          duration: 0.45,
-          ease: "power2.out",
+          duration: 0.8, // Tăng duration từ 0.45 lên 0.8
+          ease: "power1.out", // Đổi ease nhẹ nhàng hơn
         },
-        textStart + (title || description ? 0.3 : 0.15),
+        textStart + (title || description ? 0.5 : 0.2), // Tăng overlap từ 0.3 lên 0.5
       );
     }
   }
@@ -678,7 +690,7 @@ export function mousetail() {
   }
 }
 export function bannerWithOutHome() {
-  const sections = document.querySelectorAll(".banner-description"); // Đổi thành querySelectorAll
+  const sections = document.querySelectorAll(".banner-description");
   if (!sections.length) return;
 
   gsap.registerPlugin(ScrollTrigger);
@@ -687,7 +699,7 @@ export function bannerWithOutHome() {
     // Set trạng thái ban đầu cho từng section
     gsap.set(section.querySelectorAll(".tag, .description, .button"), {
       opacity: 0,
-      y: 20,
+      y: 30, // Tăng khoảng cách di chuyển
     });
 
     // Check nếu có class scroll-trigger
@@ -710,28 +722,28 @@ export function bannerWithOutHome() {
       .to(section.querySelector(".tag"), {
         opacity: 1,
         y: 0,
-        duration: 0.4,
-        ease: "power2.out",
+        duration: 0.8, // Tăng duration
+        ease: "power1.out", // Ease nhẹ nhàng hơn
       })
       .to(
         section.querySelector(".description"),
         {
           opacity: 1,
           y: 0,
-          duration: 0.4,
-          ease: "power2.out",
+          duration: 0.8,
+          ease: "power1.out",
         },
-        "-=0.2",
+        "-=0.5", // Tăng overlap
       )
       .to(
         section.querySelector(".button"),
         {
           opacity: 1,
           y: 0,
-          duration: 0.4,
-          ease: "power2.out",
+          duration: 0.8,
+          ease: "power1.out",
         },
-        "-=0.2",
+        "-=0.5",
       );
   });
 }
@@ -787,20 +799,39 @@ export function swiperLocation() {
       y: 20,
     });
 
-    gsap
-      .timeline({
-        scrollTrigger: {
-          trigger: ".all-location",
-          start: "top 80%",
-          toggleActions: "play none none none",
-        },
-      })
-      .to(tag, {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        ease: "power2.out",
-      });
+    let hasAnimated = false; // Flag để track animation đã chạy chưa
+
+    ScrollTrigger.create({
+      trigger: ".all-location",
+      start: "top 65%",
+      end: "bottom top",
+      // markers: true,
+      onEnter: () => {
+        if (!hasAnimated) {
+          // Chỉ animate fade 1 lần
+          gsap.to(tag, {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: "power2.out",
+            onComplete: () => {
+              setTimeout(() => {
+                tag.classList.add("active");
+              }, 200);
+            },
+          });
+          hasAnimated = true;
+        } else {
+          // Các lần sau chỉ add class
+          setTimeout(() => {
+            tag.classList.add("active");
+          }, 200);
+        }
+      },
+      onLeaveBack: () => {
+        tag.classList.remove("active");
+      },
+    });
   }
 
   // Animate location items
@@ -833,7 +864,7 @@ export function swiperLocation() {
         toggleActions: "play none none none",
         // markers: true,
       },
-      delay: 0.3, // Delay để tag có thời gian chạy trước
+      delay: 0.3,
     });
 
     tl
@@ -897,6 +928,154 @@ export function swiperLocation() {
           ease: "power2.out",
         },
         "-=0.4",
+      );
+  });
+}
+export function unionSectionAnimation() {
+  const unionSection = document.querySelector(".union");
+  if (!unionSection) return;
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const tag = unionSection.querySelector(".tag");
+  const unionItems = unionSection.querySelectorAll(".union-item");
+
+  if (!unionItems.length) return;
+
+  // ── 1. Animate tag trước ──
+  if (tag) {
+    gsap.set(tag, {
+      opacity: 0,
+      y: 50,
+    });
+
+    let hasAnimated = false;
+
+    ScrollTrigger.create({
+      trigger: unionSection,
+      start: "top 65%",
+      end: "bottom top",
+      // markers: true,
+      onEnter: () => {
+        if (!hasAnimated) {
+          gsap.to(tag, {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power1.out",
+            onComplete: () => {
+              setTimeout(() => {
+                tag.classList.add("active");
+              }, 200);
+            },
+          });
+          hasAnimated = true;
+        } else {
+          setTimeout(() => {
+            tag.classList.add("active");
+          }, 200);
+        }
+      },
+      onLeaveBack: () => {
+        tag.classList.remove("active");
+      },
+    });
+  }
+
+  // ── 2. Animate từng union-item ──
+  unionItems.forEach((item) => {
+    const revealElement = item.querySelector(".reveal-element-stagger");
+    const overlay = revealElement?.querySelector(".reveal-overlay");
+    const img = revealElement?.querySelector(".image img");
+    const content = item.querySelector(".union-content");
+    const title = content?.querySelector(".title");
+    const description = content?.querySelector(".description");
+    const button = content?.querySelector(".union-button");
+
+    if (!overlay || !img || !content) return;
+
+    // Set initial state
+    gsap.set(overlay, {
+      scaleX: 0,
+      transformOrigin: "left",
+    });
+
+    gsap.set([title, description, button], {
+      opacity: 0,
+      y: 50,
+    });
+
+    // Timeline với ScrollTrigger
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: item,
+        start: "top 70%",
+        toggleActions: "play none none none",
+        // markers: true,
+      },
+    });
+
+    tl
+      // 1. Overlay quét từ TRÁI → PHẢI
+      .fromTo(
+        overlay,
+        { scaleX: 0, transformOrigin: "left" },
+        {
+          scaleX: 1,
+          duration: 0.6,
+          ease: "power3.out",
+        },
+      )
+      // 2. Overlay rút từ PHẢI → TRÁI
+      .to(
+        overlay,
+        {
+          scaleX: 0,
+          transformOrigin: "right",
+          duration: 0.6,
+          ease: "power2.inOut",
+        },
+        "+=0.1",
+      )
+      // 3. Hình ảnh scale nhẹ + fade in
+      .fromTo(
+        img,
+        { opacity: 0, scale: 1.05 },
+        { opacity: 1, scale: 1, duration: 1.0, ease: "power2.out" },
+        "-=0.6",
+      )
+      // 4. Title fade in (bắt đầu khi overlay chạy ~70%)
+      .to(
+        title,
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power1.out",
+        },
+        0.9,
+      )
+      // 5. Description fade in
+      .to(
+        description,
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power1.out",
+        },
+        "-=0.5",
+      )
+      // 6. Button fade in
+      .to(
+        button,
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power1.out",
+        },
+        "-=0.5",
       );
   });
 }

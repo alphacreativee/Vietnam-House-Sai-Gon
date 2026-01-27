@@ -16,6 +16,8 @@
   &-box {
     max-width: 50%;
     width: 100%;
+    position: relative;
+    z-index: 3;
     .tag {
       display: flex;
       justify-content: center;

@@ -13,6 +13,7 @@ import {
   bannerWithOutHome,
   changeBackgroundColor,
   swiperLocation,
+  unionSectionAnimation,
 } from "../../main/js/global.min.js";
 ("use strict");
 $ = jQuery;
@@ -50,6 +51,7 @@ const init = () => {
   ctaRun();
   mousetail();
   swiperLocation();
+  unionSectionAnimation();
 };
 preloadImages("img").then(() => {
   init();

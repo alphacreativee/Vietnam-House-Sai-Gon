@@ -1,3 +1,4 @@
+@charset "UTF-8";
 :root {
   --font-heading: "Georgia", sans-serif;
   --font-body: "SFU Futura", sans-serif;
@@ -1014,6 +1015,8 @@ main.change-background-color.active {
 .banner-description-box {
   max-width: 50%;
   width: 100%;
+  position: relative;
+  z-index: 3;
 }
 .banner-description-box .tag {
   display: flex;
@@ -1093,17 +1096,17 @@ main.change-background-color.active {
   margin-bottom: 40px;
   position: relative;
 }
+.all-location .tag.active .tag-animation::before {
+  transform: scaleX(1);
+}
+.all-location .tag.active .tag-animation::after {
+  transform: scaleX(1);
+}
 .all-location .tag-animation {
   font-weight: 500;
   line-height: 62px;
   position: relative;
   text-align: center;
-}
-.all-location .tag-animation:hover::before {
-  transform: scaleX(1);
-}
-.all-location .tag-animation:hover::after {
-  transform: scaleX(1);
 }
 .all-location .tag-animation::before {
   content: "";
@@ -1144,8 +1147,26 @@ main.change-background-color.active {
   z-index: 2;
   background-color: var(--color-primary-2);
 }
+.all-location .location-item .reveal-element-stagger {
+  height: 360px;
+}
+.all-location .location-item .image {
+  width: 100%;
+  height: 100%;
+}
+.all-location .location-item .image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 .all-location .location-item .location-content {
   padding-top: 40px;
+  max-width: 80%;
+  margin: 0 auto;
+  height: calc(100% - 360px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .all-location .location-item .location-content h4 {
   font-size: 20px;
@@ -1161,4 +1182,147 @@ main.change-background-color.active {
   color: var(--color-black);
   text-align: center;
   margin-bottom: 40px;
+}
+.all-location .swiper-slide {
+  height: auto;
+}
+.all-location .location-item {
+  height: 100%;
+}
+.all-location .swiper-arrow {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-black);
+  margin-top: 0;
+  transform: translateY(-180px);
+  transition: all 0.3s ease;
+}
+.all-location .swiper-arrow.swiper-button-lock {
+  opacity: 0;
+}
+.all-location .swiper-arrow:hover {
+  background-color: var(--color-primary-2);
+}
+.all-location .swiper-arrow svg {
+  width: auto;
+  height: auto;
+}
+.all-location .swiper-arrow::after {
+  font-size: 0;
+  content: unset;
+}
+.all-location .swiper-button-next {
+  right: 24px;
+}
+.all-location .swiper-button-prev {
+  left: 24px;
+}
+
+.union {
+  padding: 0 48px 120px;
+}
+.union .tag {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40px;
+  position: relative;
+}
+.union .tag.active .tag-animation::before {
+  transform: scaleX(1);
+}
+.union .tag.active .tag-animation::after {
+  transform: scaleX(1);
+}
+.union .tag .tag-animation {
+  font-weight: 500;
+  position: relative;
+  display: inline-block; /* ← thêm cái này rất quan trọng */
+  text-align: center;
+  padding: 16px 0;
+  /* max-width: 350px; */ /* có thể giữ hoặc bỏ tùy ý */
+}
+.union .tag .tag-animation::before, .union .tag .tag-animation::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0; /* ← thêm right: 0 */
+  height: 1px;
+  background-color: var(--color-black);
+  transform: scaleX(0.5);
+  transform-origin: center;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.union .tag .tag-animation::before {
+  top: 0;
+}
+.union .tag .tag-animation::after {
+  bottom: 0;
+}
+.tag.active .union .tag .tag-animation {
+  /* cách viết gọn hơn */
+}
+.tag.active .union .tag .tag-animation::before, .tag.active .union .tag .tag-animation::after {
+  transform: scaleX(1);
+}
+.union-list {
+  display: flex;
+  flex-direction: column;
+  gap: 90px 0;
+}
+.union-item {
+  display: grid;
+  grid-template-columns: 4fr 8fr;
+  align-items: flex-end;
+  gap: 32px;
+}
+.union-item.reverse-row {
+  grid-template-columns: 8fr 4fr;
+}
+.union-item.reverse-row .union-content {
+  grid-column: 2/3;
+}
+.union-item.reverse-row .union-image {
+  grid-column: 1/2;
+  grid-row: 1/2;
+}
+.union-image {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+.union-image .reveal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  background-color: var(--color-primary-2);
+}
+.union-image .image {
+  width: 100%;
+  height: 360px;
+}
+.union-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.union-content .box h5 {
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: bold;
+  color: var(--color-black);
+  margin-bottom: 12px;
+  text-align: center;
+  font-family: var(--font-heading);
+}
+.union-content .box .description {
+  text-align: center;
+  margin-bottom: 120px;
 }
