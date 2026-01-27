@@ -699,7 +699,7 @@ export function bannerWithOutHome() {
               trigger: section,
               start: "top 70%",
               toggleActions: "play none none none",
-              markers: true,
+              // markers: true,
             },
           }
         : {},
