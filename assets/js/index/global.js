@@ -564,11 +564,12 @@ export function ctaRun() {
   });
 }
 export function mousetail() {
-  if (!document.querySelector(".mouse-trail")) return;
+  const mouseContainer = document.querySelector(".mouse-trail");
+  if (!mouseContainer) return;
+
   const hiddenImages = document.querySelectorAll(".hidden-images img");
   const images = Array.from(hiddenImages).map((img) => img.src);
 
-  const mouseContainer = document.querySelector(".mouse-trail");
   let currentImageIndex = 0;
   let lastX = 0;
   let lastY = 0;
@@ -587,8 +588,8 @@ export function mousetail() {
       currentImageIndex = (currentImageIndex + 1) % images.length;
 
       // Vị trí ngẫu nhiên trên màn hình
-      const randomX = Math.random() * (window.innerWidth - 100); // -80 để không bị cắt hình
-      const randomY = Math.random() * (window.innerHeight - 100); // -80 để không bị cắt hình
+      const randomX = Math.random() * (window.innerWidth - 100);
+      const randomY = Math.random() * (window.innerHeight - 100);
 
       gsap.set(img, {
         x: randomX,
@@ -629,8 +630,8 @@ export function mousetail() {
     // Bắt đầu hiệu ứng
     startRandomImageFall();
   } else {
-    // Desktop: giữ nguyên hiệu ứng theo chuột
-    window.addEventListener("mousemove", (e) => {
+    // Desktop: lắng nghe mousemove chỉ trên mouseContainer
+    mouseContainer.addEventListener("mousemove", (e) => {
       const dx = e.clientX - lastX;
       const dy = e.clientY - lastY;
       const distance = Math.sqrt(dx * dx + dy * dy);
@@ -650,7 +651,7 @@ export function mousetail() {
     currentImageIndex = (currentImageIndex + 1) % images.length;
 
     gsap.set(img, {
-      x: x - 40, // Center the image
+      x: x - 40,
       y: y - 40,
       scale: 0,
       opacity: 0,
