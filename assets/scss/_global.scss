@@ -100,3 +100,22 @@
   top: -12px;
   left: -12px;
 }
+
+.mf-cursor {
+  &.-text {
+    &::before {
+      width: 64px !important;
+      height: 64px !important;
+      top: -32px !important;
+      left: -32px !important;
+      transform: scale(1) !important;
+      background-color: var(--color-primary-2);
+      opacity: 1;
+    }
+    .mf-cursor-text {
+      font-size: 12px;
+      line-height: 16px;
+      color: var(--color-black);
+    }
+  }
+}

@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Menu</title>
+    <!-- import favicon -->
+    <link
+      rel="icon"
+      href="./assets/images/icons/favicon.svg"
+      type="image/x-icon"
+    />
+    <!-- meta -->
+    <meta property="og:url" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="" />
+    <meta property="og:description" content="" />
+    <meta property="og:image" content="" />
+    <!-- meta -->
+    <link rel="stylesheet" href="./assets/libs/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/libs/lenis.css" />
+    <link rel="stylesheet" href="./assets/libs/swiper-bundle.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/mouse-follower@1/dist/mouse-follower.min.css"
+    />
+
+    <!-- end meta -->
+    <!-- link custom css page -->
+    <link rel="stylesheet" href="./assets/fonts/Georgia/stylesheet.css" />
+    <link rel="stylesheet" href="./assets/fonts/SFU-Futura/stylesheet.css" />
+    <link rel="stylesheet" href="./assets/main/css/style.min.css" />
+    <!-- end link custom css page -->
+    <!-- scrollRestoration -->
+    <script>
+      if ("scrollRestoration" in history) {
+        history.scrollRestoration = "manual";
+      }
+    </script>
+  </head>
+  <body>
+    <!-- layout -->
+    <!-- header -->
+    <script>
+      fetch("./components/header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("header").innerHTML = data;
+          const currentPath = window.location.pathname || "/";
+
+          const navLinks = document.querySelectorAll(".header-menu ul>li>a");
+          navLinks.forEach((link) => {
+            const linkPath = link.getAttribute("href");
+
+            // Normalize paths for comparison
+            let normalizedCurrentPath = currentPath;
+            let normalizedLinkPath = linkPath;
+
+            // Remove leading "./" from link path
+            if (normalizedLinkPath.startsWith("./")) {
+              normalizedLinkPath = normalizedLinkPath.substring(1);
+            }
+
+            // Get the last segment of the path
+            const currentSegment = normalizedCurrentPath.split("/").pop() || "";
+            const linkSegment = normalizedLinkPath.split("/").pop() || "";
+
+            // Check if current path is root or ends with /
+            const isRootPath =
+              currentPath === "/" ||
+              currentPath.endsWith("/") ||
+              currentSegment === "";
+
+            // Check if link is home/index
+            const isHomeLink =
+              linkPath === "/" ||
+              linkPath === "./" ||
+              linkPath === "./index.html" ||
+              linkPath === "index.html" ||
+              linkSegment === "index.html";
+
+            // Match logic
+            const isMatch =
+              normalizedLinkPath === normalizedCurrentPath || // Exact match
+              currentSegment === linkSegment || // Segment match
+              (isRootPath && isHomeLink) || // Root path matches home link
+              (currentPath.endsWith(normalizedLinkPath) &&
+                normalizedLinkPath !== "/");
+
+            if (isMatch) {
+              link.classList.add("active");
+            }
+          });
+        });
+    </script>
+    <header id="header"></header>
+    <!-- end header -->
+
+    <!-- cta -->
+    <script>
+      fetch("./components/cta.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("cta").innerHTML = data;
+        });
+    </script>
+    <div id="cta"></div>
+    <!-- end cta -->
+    <main>
+      <section class="banner-description">
+        <div class="banner-description-box">
+          <div class="tag">
+            <div class="tag-animation h0-font text-uppercase">At dong khoi</div>
+          </div>
+          <div class="description">
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry's standard dummy text
+            ever since the 1500s, when an unknown printer took a galley of type
+            and scrambled it to make a type specimen book. It has survived not
+            only five centuries.
+          </div>
+          <div class="button d-flex justify-content-center">
+            <a href="#" class="button-global">
+              <span class="text-wrapper">
+                <span class="text-default">Make a Reservation</span>
+              </span>
+            </a>
+          </div>
+        </div>
+        <div class="hidden-images d-none">
+          <img src="./assets/images/del/menu-g-1.webp" alt="" />
+          <img src="./assets/images/del/menu-g-2.webp" alt="" />
+          <img src="./assets/images/del/menu-g-3.webp" alt="" />
+          <img src="./assets/images/del/menu-g-4.webp" alt="" />
+          <img src="./assets/images/del/menu-g-5.webp" alt="" />
+        </div>
+      </section>
+      <section class="menu-gallery column-layout-2">
+        <div class="menu-gallery-list">
+          <div
+            class="menu-gallery-item reveal-element-stagger"
+            data-cursor-text="Menu"
+          >
+            <div class="reveal-overlay"></div>
+            <div class="image">
+              <img src="./assets/images/del/menu-g-1.webp" alt="" />
+            </div>
+            <div class="tag">
+              <div class="tag-animation">Lunch</div>
+            </div>
+            <div class="icon-menu">
+              <img src="./assets/images/icons/icon-menu.svg" alt="" />
+            </div>
+            <a href="" class="link-review"></a>
+          </div>
+          <div
+            class="menu-gallery-item reveal-element-stagger"
+            data-cursor-text="Menu"
+          >
+            <div class="reveal-overlay"></div>
+            <div class="image">
+              <img src="./assets/images/del/menu-g-2.webp" alt="" />
+            </div>
+
+            <div class="tag">
+              <div class="tag-animation">A La Carte</div>
+            </div>
+            <div class="icon-menu">
+              <img src="./assets/images/icons/icon-menu.svg" alt="" />
+            </div>
+            <a href="" class="link-review"></a>
+          </div>
+          <div
+            class="menu-gallery-item reveal-element-stagger"
+            data-cursor-text="Menu"
+          >
+            <div class="reveal-overlay"></div>
+            <div class="image">
+              <img src="./assets/images/del/menu-g-3.webp" alt="" />
+            </div>
+            <div class="tag">
+              <div class="tag-animation">Dinner</div>
+            </div>
+            <div class="icon-menu">
+              <img src="./assets/images/icons/icon-menu.svg" alt="" />
+            </div>
+            <a href="" class="link-review"></a>
+          </div>
+          <div
+            class="menu-gallery-item reveal-element-stagger"
+            data-cursor-text="Menu"
+          >
+            <div class="reveal-overlay"></div>
+            <div class="image">
+              <img src="./assets/images/del/menu-g-4.webp" alt="" />
+            </div>
+            <div class="tag">
+              <div class="tag-animation">Drinks</div>
+            </div>
+            <div class="icon-menu">
+              <img src="./assets/images/icons/icon-menu.svg" alt="" />
+            </div>
+            <a href="" class="link-review"></a>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- layout -->
+    <!-- footer -->
+    <script>
+      fetch("./components/footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("footer").innerHTML = data;
+        });
+    </script>
+    <footer id="footer"></footer>
+    <!-- end footer -->
+    <!-- end layout -->
+
+    <script src="./assets/libs/jquery-3.7.1.js"></script>
+    <script src="./assets/libs/lenis.min.js"></script>
+    <script src="./assets/libs/gsap.min.js"></script>
+    <script src="./assets/libs/ScrollTrigger.min.js"></script>
+    <script src="./assets/libs/SplitText.min.js"></script>
+    <script src="./assets/libs/bootstrap.bundle.min.js"></script>
+    <script src="./assets/libs/imagesloaded.pkgd.min.js"></script>
+    <script src="./assets/libs/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/mouse-follower@1/dist/mouse-follower.min.js"></script>
+    <!-- import custom js -->
+    <script type="module" src="./assets/main/js/script.min.js"></script>
+
+    <!-- end import custom js -->
+  </body>
+</html>
+<!-- https://gsap.com/community/forums/topic/30338-circular-carouselslider/ -->

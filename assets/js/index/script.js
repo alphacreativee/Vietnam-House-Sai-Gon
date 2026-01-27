@@ -9,6 +9,8 @@ import {
   menuGalleryReveal,
   cursor,
   ctaRun,
+  mousetail,
+  bannerWithOutHome,
 } from "../../main/js/global.min.js";
 ("use strict");
 $ = jQuery;
@@ -31,6 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
       .catch((err) => console.error("Loading error:", err));
   } else {
     bannerRevealWithContent();
+    bannerWithOutHome();
   }
 });
 const init = () => {
@@ -42,6 +45,7 @@ const init = () => {
   menuGalleryReveal();
   cursor();
   ctaRun();
+  mousetail();
 };
 preloadImages("img").then(() => {
   init();
