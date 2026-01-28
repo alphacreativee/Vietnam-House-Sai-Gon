@@ -437,14 +437,14 @@ main.change-background-color {
   font-size: 14px;
   line-height: 23px;
   color: var(--color-primary-2);
-  letter-spacing: 0.04rem;
+  letter-spacing: 0.03rem;
 }
 #footer .footer-main-col.opening-hours .day-open {
   font-family: var(--font-body);
   font-size: 14px;
   line-height: 23px;
   color: var(--color-primary-2);
-  letter-spacing: 0.04rem;
+  letter-spacing: 0.03rem;
   margin-bottom: 16px;
 }
 #footer .footer-main-col.opening-hours ul {
@@ -458,7 +458,7 @@ main.change-background-color {
   font-size: 14px;
   line-height: 23px;
   color: var(--color-primary-2);
-  letter-spacing: 0.04rem;
+  letter-spacing: 0.03rem;
 }
 #footer .footer-main-col.address-col .address-item ul li p,
 #footer .footer-main-col.address-col .address-item ul li a {
@@ -466,7 +466,7 @@ main.change-background-color {
   font-size: 14px;
   line-height: 23px;
   color: var(--color-primary-2);
-  letter-spacing: 0.04rem;
+  letter-spacing: 0.03rem;
 }
 #footer .footer-main-col.address-col .address-group {
   display: flex;
@@ -493,7 +493,7 @@ main.change-background-color {
   line-height: 16px;
   font-weight: 400;
   color: var(--color-primary-2);
-  letter-spacing: 0.04rem;
+  letter-spacing: 0.03rem;
   font-family: var(--font-body);
   text-align: center;
 }
@@ -507,7 +507,7 @@ main.change-background-color {
   line-height: 16px;
   font-weight: 400;
   color: var(--color-primary-2);
-  letter-spacing: 0.04rem;
+  letter-spacing: 0.03rem;
   font-family: var(--font-body);
 }
 #footer .footer-main-bottom .text-copyright span {
@@ -515,7 +515,7 @@ main.change-background-color {
   line-height: 16px;
   font-weight: 400;
   color: var(--color-primary-2);
-  letter-spacing: 0.04rem;
+  letter-spacing: 0.03rem;
   font-family: var(--font-body);
 }
 #footer .footer-main-bottom .footer-bottom-right {
@@ -546,7 +546,7 @@ main.change-background-color {
   line-height: 23px;
   font-weight: bold;
   color: var(--color-primary-2);
-  letter-spacing: 0.04rem;
+  letter-spacing: 0.03rem;
 }
 
 #loading {
