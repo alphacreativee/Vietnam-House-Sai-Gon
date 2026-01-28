@@ -1,6 +1,7 @@
 .all-location {
   position: relative;
   padding-bottom: 120px;
+  overflow: hidden;
   .tag {
     display: flex;
     justify-content: center;
@@ -144,19 +145,53 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
     background-color: var(--color-black);
     margin-top: 0;
     transform: translateY(-180px);
     transition: all 0.3s ease;
+    &:hover {
+      .global {
+        &::after {
+          transform: scaleX(1);
+          transform-origin: bottom left;
+        }
+        svg {
+          transform: translateX(2px);
+        }
+      }
+    }
+    .global {
+      position: relative;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      &::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: var(--color-primary-1);
+        bottom: 0;
+        left: 0;
+        transform: scaleX(0);
+        transform-origin: bottom right;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 1;
+      }
+    }
     &.swiper-button-lock {
       opacity: 0;
     }
-    &:hover {
-      background-color: var(--color-primary-2);
-    }
+
     svg {
       width: auto;
       height: auto;
+      z-index: 3;
+      transition: transform 0.3s ease;
     }
     &::after {
       font-size: 0;
@@ -168,5 +203,20 @@
   }
   .swiper-button-prev {
     left: 24px;
+    &:hover {
+      .global {
+        &::after {
+          transform-origin: bottom right;
+        }
+        svg {
+          transform: translateX(-2px);
+        }
+      }
+    }
+    .global {
+      &::after {
+        transform-origin: bottom left;
+      }
+    }
   }
 }

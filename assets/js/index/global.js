@@ -796,8 +796,32 @@ export function swiperLocation() {
   const locationItems = document.querySelectorAll(
     ".all-location .location-item",
   );
+  const prevArrow = document.querySelector(".swiper-button-prev");
+  const nextArrow = document.querySelector(".swiper-button-next");
 
   if (!locationItems.length) return;
+
+  // Animate swiper arrows
+  if (prevArrow && nextArrow) {
+    gsap.set([prevArrow, nextArrow], {
+      opacity: 0,
+    });
+
+    ScrollTrigger.create({
+      trigger: ".swiper-location",
+      start: "top 70%",
+
+      onEnter: () => {
+        gsap.to([prevArrow, nextArrow], {
+          opacity: 1,
+          x: 0,
+          duration: 0.8,
+          ease: "power2.out",
+          stagger: 0.1,
+        });
+      },
+    });
+  }
 
   // Animate tag trước
   if (tag) {
@@ -806,16 +830,14 @@ export function swiperLocation() {
       y: 20,
     });
 
-    let hasAnimated = false; // Flag để track animation đã chạy chưa
+    let hasAnimated = false;
 
     ScrollTrigger.create({
       trigger: ".all-location",
       start: "top 65%",
       end: "bottom top",
-      // markers: true,
       onEnter: () => {
         if (!hasAnimated) {
-          // Chỉ animate fade 1 lần
           gsap.to(tag, {
             opacity: 1,
             y: 0,
@@ -829,7 +851,6 @@ export function swiperLocation() {
           });
           hasAnimated = true;
         } else {
-          // Các lần sau chỉ add class
           setTimeout(() => {
             tag.classList.add("active");
           }, 200);
@@ -853,7 +874,6 @@ export function swiperLocation() {
 
     if (!overlay || !img || !h4 || !desc || !button || !tagLocation) return;
 
-    // Set initial state
     gsap.set(overlay, {
       scaleX: 0,
       transformOrigin: "left",
@@ -864,29 +884,24 @@ export function swiperLocation() {
       y: 20,
     });
 
-    // Timeline với ScrollTrigger - delay để tag chạy trước
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: item,
         start: "top 70%",
         toggleActions: "play none none none",
-        // markers: true,
       },
       delay: 0.3,
     });
 
-    tl
-      // 1. Overlay quét từ TRÁI → PHẢI (0.6s)
-      .fromTo(
-        overlay,
-        { scaleX: 0, transformOrigin: "left" },
-        {
-          scaleX: 1,
-          duration: 0.6,
-          ease: "power3.out",
-        },
-      )
-      // 2. Overlay rút từ PHẢI → TRÁI (0.6s)
+    tl.fromTo(
+      overlay,
+      { scaleX: 0, transformOrigin: "left" },
+      {
+        scaleX: 1,
+        duration: 0.6,
+        ease: "power3.out",
+      },
+    )
       .to(
         overlay,
         {
@@ -897,14 +912,12 @@ export function swiperLocation() {
         },
         "+=0.1",
       )
-      // 3. Hình ảnh scale nhẹ + fade in
       .fromTo(
         img,
         { opacity: 0, scale: 1.05 },
         { opacity: 1, scale: 1, duration: 1.0, ease: "power2.out" },
         "-=0.6",
       )
-      // 4. H4 fade in
       .to(
         h4,
         {
@@ -925,7 +938,6 @@ export function swiperLocation() {
         },
         0.9,
       )
-      // 5. Desc fade in + slide up
       .to(
         desc,
         {
@@ -936,7 +948,6 @@ export function swiperLocation() {
         },
         "-=0.4",
       )
-      // 6. Button fade in + slide up
       .to(
         button,
         {
