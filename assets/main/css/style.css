@@ -220,13 +220,10 @@ main.change-background-color {
   overflow: hidden;
   background-color: var(--color-primary);
 }
-.button-global.background-black:after {
-  background-color: var(--color-black);
-}
 .button-global span {
   overflow: hidden;
   display: block;
-  color: var(--color-white);
+  color: var(--color-primary-2);
   font-size: 16px;
   line-height: 22px;
   position: relative;
