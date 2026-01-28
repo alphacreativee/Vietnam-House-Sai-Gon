@@ -181,6 +181,10 @@ main.change-background-color {
   background-color: var(--color-primary-2);
 }
 
+::selection {
+  background-color: var(--color-primary-1);
+}
+
 .line-hover {
   position: relative;
 }
@@ -539,12 +543,12 @@ main.change-background-color {
   width: 100%;
   height: 100svh;
   overflow: hidden;
+  padding-right: 48px;
 }
 .hero-container {
   display: grid;
-  grid-template-columns: 7fr 5fr;
+  grid-template-columns: 8fr 4fr;
   height: 100%;
-  gap: 24px;
 }
 .hero-image {
   width: 100%;
@@ -582,7 +586,6 @@ main.change-background-color {
   transform: scale(1.05);
 }
 .hero-content {
-  padding-right: 48px;
   padding-left: calc(8.3333333333% + 24px);
   display: flex;
   justify-content: center;
@@ -607,12 +610,11 @@ main.change-background-color {
 
 .chef {
   overflow: hidden;
-  padding: 48px;
+  padding: 48px 48px 48px 0;
 }
 .chef-container {
   display: grid;
   grid-template-columns: 8fr 4fr;
-  gap: 24px;
 }
 .chef-image {
   width: 100%;

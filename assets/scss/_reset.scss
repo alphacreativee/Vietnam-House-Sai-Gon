@@ -103,3 +103,6 @@ main {
     background-color: var(--color-primary-2);
   }
 }
+::selection {
+  background-color: var(--color-primary-1);
+}
