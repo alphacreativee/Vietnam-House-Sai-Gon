@@ -6,6 +6,7 @@
   --color-white: #ffffff;
   --color-primary-1: #b58150;
   --color-primary-2: #acdcd2;
+  --color-primary: #002c48;
 }
 
 .font-heading {
@@ -300,7 +301,7 @@ main {
   right: 0;
   width: 100%;
   z-index: 999;
-  background-color: var(--color-black);
+  background-color: var(--color-primary);
   transition: transform 0.5s ease;
 }
 #header.scrolled {
@@ -311,7 +312,7 @@ main {
   align-items: center;
 }
 #header .header-container {
-  padding: 6px 48px;
+  padding-left: 48px;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
@@ -396,13 +397,17 @@ main {
   display: flex;
   align-items: center;
   gap: 12px;
+  background-color: var(--color-primary-1);
+  height: 64px;
+  padding-left: 34px;
+  padding-right: 34px;
 }
 #header .header-reservation .cta-reservation span {
   font-family: var(--font-body);
   font-size: 16px;
   line-height: 26px;
   font-weight: 400;
-  color: var(--color-primary-1);
+  color: var(--color-white);
 }
 
 #footer {
