@@ -46,6 +46,11 @@
               align-items: center;
               gap: 8px;
               position: relative;
+              &.line-hover {
+                &::before {
+                  max-width: calc(100% - 20px);
+                }
+              }
               &::after {
                 content: "";
                 position: absolute;
@@ -69,12 +74,17 @@
               align-items: flex-start;
               min-width: 100%;
               gap: 4px;
-              background-color: var(--color-black);
+              background-color: var(--color-primary-2);
               padding: 16px;
               opacity: 0;
               visibility: hidden;
               transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
               transform: translateY(10px);
+              .line-hover {
+                &::before {
+                  background-color: var(--color-primary);
+                }
+              }
               li {
                 a,
                 span {
@@ -82,7 +92,7 @@
                   font-size: 14px;
                   line-height: 23px;
                   font-weight: 400;
-                  color: var(--color-primary-1);
+                  color: var(--color-primary);
                   text-transform: uppercase;
                 }
               }
@@ -94,7 +104,7 @@
             font-size: 14px;
             line-height: 23px;
             font-weight: 400;
-            color: var(--color-primary-1);
+            color: var(--color-primary-2);
             text-transform: uppercase;
           }
         }

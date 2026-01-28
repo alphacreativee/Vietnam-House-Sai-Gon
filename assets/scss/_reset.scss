@@ -97,11 +97,11 @@ main {
   margin-bottom: var(--footer-height);
   position: relative;
   z-index: 4;
-  background-color: var(--color-white);
+  background-color: var(--color-primary-2);
   will-change: background-color;
-  // &.change-background-color {
-  //   background-color: var(--color-primary-2);
-  // }
+  &.change-background-color {
+    background-color: var(--color-white);
+  }
 }
 ::selection {
   background-color: var(--color-primary-1);

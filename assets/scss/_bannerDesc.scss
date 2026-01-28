@@ -31,6 +31,7 @@
       line-height: 62px;
       position: relative;
       text-align: center;
+      color: var(--color-black);
       &:hover {
         &::before {
           transform: scaleX(1);
@@ -64,14 +65,13 @@
       }
     }
     .description {
-      font-size: 20px;
-      line-height: 28px;
-      font-weight: bold;
-      font-style: italic;
-      font-family: var(--font-heading);
+      font-size: 16px;
+      line-height: 26px;
+      font-family: var(--font-body);
       text-align: center;
       margin-bottom: 48px;
       opacity: 0;
+      color: var(--color-black);
     }
     .button {
       opacity: 0;
