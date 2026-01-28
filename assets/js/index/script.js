@@ -76,19 +76,35 @@ window.addEventListener("beforeunload", () => {
   isLinkClicked = false;
 });
 
-const footer = document.querySelector("footer");
+// Kết hợp cả DOMContentLoaded và load
+const initFooter = () => {
+  const footer = document.querySelector("footer");
 
-if (footer) {
+  if (!footer) return;
+
   const updateFooterHeight = () => {
     const height = footer.offsetHeight;
-    document.documentElement.style.setProperty(
-      "--footer-height",
-      `${height}px`,
-    );
+    if (height > 0) {
+      // Chỉ update khi có chiều cao thực
+      document.documentElement.style.setProperty(
+        "--footer-height",
+        `${height}px`,
+      );
+    }
   };
 
   updateFooterHeight();
 
   const resizeObserver = new ResizeObserver(updateFooterHeight);
   resizeObserver.observe(footer);
+};
+
+// Chạy khi DOM ready
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initFooter);
+} else {
+  initFooter();
 }
+
+// Chạy lại khi tất cả resources load xong
+window.addEventListener("load", initFooter);
