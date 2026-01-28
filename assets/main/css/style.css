@@ -218,7 +218,7 @@ main.change-background-color {
   align-items: center;
   position: relative;
   overflow: hidden;
-  background-color: var(--color-primary-1);
+  background-color: var(--color-primary);
 }
 .button-global.background-black:after {
   background-color: var(--color-black);
@@ -241,15 +241,12 @@ main.change-background-color {
   transform: scaleX(1);
   transform-origin: bottom left;
 }
-.button-global:hover span {
-  animation: MoveUpInitial 0.3s forwards, MoveUpEnd 0.2s forwards 0.2s;
-}
 .button-global:after {
   content: "";
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: var(--color-primary-2);
+  background-color: var(--color-primary-1);
   bottom: 0;
   left: 0;
   transform: scaleX(0);
