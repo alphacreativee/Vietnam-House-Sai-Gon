@@ -177,9 +177,6 @@ main {
   background-color: var(--color-white);
   will-change: background-color;
 }
-main.change-background-color {
-  background-color: var(--color-primary-2);
-}
 
 ::selection {
   background-color: var(--color-primary-1);

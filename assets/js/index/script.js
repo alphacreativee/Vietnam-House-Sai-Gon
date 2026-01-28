@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
   } else {
     bannerRevealWithContent();
     bannerWithOutHome();
-    changeBackgroundColor();
+    // changeBackgroundColor();
     swiperLocation();
   }
 });
