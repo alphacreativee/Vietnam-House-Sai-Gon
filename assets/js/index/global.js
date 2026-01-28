@@ -838,11 +838,12 @@ export function swiperLocation() {
     const revealElement = item.querySelector(".reveal-element-stagger");
     const overlay = revealElement?.querySelector(".reveal-overlay");
     const img = revealElement?.querySelector(".image img");
+    const tagLocation = item.querySelector(".tag-location-list");
     const h4 = item.querySelector(".location-content h4");
     const desc = item.querySelector(".location-content .desc");
     const button = item.querySelector(".location-content .button");
 
-    if (!overlay || !img || !h4 || !desc || !button) return;
+    if (!overlay || !img || !h4 || !desc || !button || !tagLocation) return;
 
     // Set initial state
     gsap.set(overlay, {
@@ -850,7 +851,7 @@ export function swiperLocation() {
       transformOrigin: "left",
     });
 
-    gsap.set([h4, desc, button], {
+    gsap.set([h4, desc, button, tagLocation], {
       opacity: 0,
       y: 20,
     });
@@ -898,6 +899,16 @@ export function swiperLocation() {
       // 4. H4 fade in
       .to(
         h4,
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power2.out",
+        },
+        0.9,
+      )
+      .to(
+        tagLocation,
         {
           opacity: 1,
           y: 0,
