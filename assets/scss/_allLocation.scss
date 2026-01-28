@@ -75,7 +75,11 @@
         font-size: 12px;
         line-height: 16px;
         background-color: var(--color-black);
-        color: var(--color-white);
+        color: var(--color-primary-2);
+        &.union-tag {
+          color: var(--color-black);
+          background-color: var(--color-primary-2);
+        }
       }
     }
     .reveal-overlay {

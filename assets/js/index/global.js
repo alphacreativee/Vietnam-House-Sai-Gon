@@ -563,11 +563,19 @@ export function ctaRun() {
   gsap.registerPlugin(ScrollTrigger);
 
   const isShortPage = () => document.body.scrollHeight <= window.innerHeight;
+  const footer = document.querySelector("footer");
 
   ScrollTrigger.create({
     trigger: "body",
     start: "top top",
-    end: "bottom bottom",
+    end: () => {
+      if (!footer) return "bottom bottom";
+
+      // Cộng thêm chiều cao footer để end point kéo dài hơn
+      const footerHeight = footer.offsetHeight;
+      return `bottom+=${footerHeight}px bottom`;
+    },
+    // markers: true,
     onUpdate: (self) => {
       if (!isShortPage()) {
         cta.classList.toggle("run-right", self.direction === 1);
