@@ -100,7 +100,7 @@ main {
   background-color: var(--color-primary-2);
   will-change: background-color;
   &.change-background-color {
-    background-color: var(--color-white);
+    background-color: var(--color-primary-2);
   }
 }
 ::selection {
