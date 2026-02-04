@@ -728,7 +728,7 @@ export function bannerWithOutHome() {
     // Set trạng thái ban đầu cho từng section
     gsap.set(section.querySelectorAll(".tag, .description, .button"), {
       opacity: 0,
-      y: 30, // Tăng khoảng cách di chuyển
+      y: 20, // Tăng khoảng cách di chuyển
     });
 
     // Check nếu có class scroll-trigger
@@ -1151,5 +1151,33 @@ export function headerMobile() {
     // } else {
     //   document.body.classList.remove("overflow-hidden");
     // }
+  });
+}
+export function initScrollToSection() {
+  const addressItems = document.querySelectorAll(".fixed-address-item");
+
+  addressItems.forEach((item) => {
+    item.addEventListener("click", function () {
+      // Remove active từ tất cả items
+      addressItems.forEach((el) => el.classList.remove("active"));
+
+      // Thêm active cho item được click
+      this.classList.add("active");
+
+      // Lấy sectionId từ text
+      const sectionId = this.textContent
+        .trim()
+        .toLowerCase()
+        .replace(/\s+/g, "-");
+
+      // Scroll tới section
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+    });
   });
 }
