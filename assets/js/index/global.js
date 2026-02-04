@@ -1158,19 +1158,15 @@ export function initScrollToSection() {
 
   addressItems.forEach((item) => {
     item.addEventListener("click", function () {
-      // Remove active từ tất cả items
       addressItems.forEach((el) => el.classList.remove("active"));
 
-      // Thêm active cho item được click
       this.classList.add("active");
 
-      // Lấy sectionId từ text
       const sectionId = this.textContent
         .trim()
         .toLowerCase()
         .replace(/\s+/g, "-");
 
-      // Scroll tới section
       const section = document.getElementById(sectionId);
       if (section) {
         section.scrollIntoView({
