@@ -1102,7 +1102,7 @@ export function unionSectionAnimation() {
         0.7,
       );
 
-    // ── Animate 3 ảnh nhỏ (nếu có) - CHẠY ĐỒNG THỜI với ảnh lớn ──
+    // ── Animate 3 ảnh nhỏ (nếu có) - CHẠY CÙNG LÚC SAU KHI ảnh lớn xong ──
     if (unionGrid) {
       const gridItems = unionGrid.querySelectorAll(".union-grid-item");
 
@@ -1126,7 +1126,7 @@ export function unionSectionAnimation() {
             duration: 0.6,
             ease: "power3.out",
           },
-          0, // ← Chạy cùng lúc với ảnh lớn
+          1.3, // ← Chạy cùng lúc sau ảnh lớn
         )
           .to(
             overlay,
@@ -1136,13 +1136,13 @@ export function unionSectionAnimation() {
               duration: 0.6,
               ease: "power2.inOut",
             },
-            0.7,
+            2.0, // 1.3 + 0.7
           )
           .fromTo(
             img,
             { opacity: 0, scale: 1.05 },
             { opacity: 1, scale: 1, duration: 1.0, ease: "power2.out" },
-            0.7,
+            2.0,
           );
       });
     }
