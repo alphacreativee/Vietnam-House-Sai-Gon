@@ -1159,7 +1159,6 @@ export function initScrollToSection() {
   addressItems.forEach((item) => {
     item.addEventListener("click", function () {
       addressItems.forEach((el) => el.classList.remove("active"));
-
       this.classList.add("active");
 
       const sectionId = this.textContent
@@ -1169,11 +1168,37 @@ export function initScrollToSection() {
 
       const section = document.getElementById(sectionId);
       if (section) {
-        section.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
+        gsap.to(window, {
+          duration: 1,
+          scrollTo: { y: section, offsetY: 0 },
+          ease: "power2.inOut",
         });
       }
     });
+  });
+
+  addressItems.forEach((item) => {
+    const sectionId = item.textContent
+      .trim()
+      .toLowerCase()
+      .replace(/\s+/g, "-");
+    const section = document.getElementById(sectionId);
+
+    if (section) {
+      ScrollTrigger.create({
+        trigger: section,
+        start: "top center",
+        end: "bottom center",
+        // markers: true,
+        onEnter: () => {
+          addressItems.forEach((el) => el.classList.remove("active"));
+          item.classList.add("active");
+        },
+        onEnterBack: () => {
+          addressItems.forEach((el) => el.classList.remove("active"));
+          item.classList.add("active");
+        },
+      });
+    }
   });
 }
