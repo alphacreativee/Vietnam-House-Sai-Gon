@@ -988,7 +988,7 @@ export function unionSectionAnimation() {
   gsap.registerPlugin(ScrollTrigger);
 
   const tag = unionSection.querySelector(".tag");
-  const unionItems = unionSection.querySelectorAll(".union-item");
+  const unionItems = unionSection.querySelectorAll(".union-row");
 
   if (!unionItems.length) return;
 
@@ -1032,20 +1032,28 @@ export function unionSectionAnimation() {
     });
   }
 
-  // ── 2. Animate từng union-item ──
-  unionItems.forEach((item) => {
-    const revealElement = item.querySelector(".reveal-element-stagger");
-    const overlay = revealElement?.querySelector(".reveal-overlay");
-    const img = revealElement?.querySelector(".image img");
-    const content = item.querySelector(".union-content");
+  // ── 2. Animate từng union-row ──
+  unionItems.forEach((row) => {
+    const unionItem = row.querySelector(".union-item");
+    const unionGrid = row.querySelector(".union-grid");
+
+    if (!unionItem) return;
+
+    // Get elements từ union-item (ảnh lớn)
+    const mainRevealElement = unionItem.querySelector(
+      ".reveal-element-stagger",
+    );
+    const mainOverlay = mainRevealElement?.querySelector(".reveal-overlay");
+    const mainImg = mainRevealElement?.querySelector(".image img");
+    const content = unionItem.querySelector(".union-content");
     const title = content?.querySelector(".title");
     const description = content?.querySelector(".description");
     const button = content?.querySelector(".union-button");
 
-    if (!overlay || !img || !content) return;
+    if (!mainOverlay || !mainImg || !content) return;
 
     // Set initial state
-    gsap.set(overlay, {
+    gsap.set(mainOverlay, {
       scaleX: 0,
       transformOrigin: "left",
     });
@@ -1055,57 +1063,100 @@ export function unionSectionAnimation() {
       y: 50,
     });
 
-    // Timeline với ScrollTrigger
+    // Timeline
     const tl = gsap.timeline({
       scrollTrigger: {
-        trigger: item,
+        trigger: row,
         start: "top 70%",
         toggleActions: "play none none none",
         // markers: true,
       },
     });
 
-    tl
-      // 1. Overlay quét từ TRÁI → PHẢI
-      .fromTo(
-        overlay,
-        { scaleX: 0, transformOrigin: "left" },
-        {
-          scaleX: 1,
-          duration: 0.6,
-          ease: "power3.out",
-        },
-      )
-      // 2. Overlay rút từ PHẢI → TRÁI
+    // ── Animate ảnh lớn ──
+    tl.fromTo(
+      mainOverlay,
+      { scaleX: 0, transformOrigin: "left" },
+      {
+        scaleX: 1,
+        duration: 0.6,
+        ease: "power3.out",
+      },
+      0,
+    )
       .to(
-        overlay,
+        mainOverlay,
         {
           scaleX: 0,
           transformOrigin: "right",
           duration: 0.6,
           ease: "power2.inOut",
         },
-        "+=0.1",
+        0.7,
       )
-      // 3. Hình ảnh scale nhẹ + fade in
       .fromTo(
-        img,
+        mainImg,
         { opacity: 0, scale: 1.05 },
         { opacity: 1, scale: 1, duration: 1.0, ease: "power2.out" },
-        "-=0.6",
-      )
-      // 4. Title fade in (bắt đầu khi overlay chạy ~70%)
-      .to(
-        title,
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          ease: "power1.out",
-        },
-        0.9,
-      )
-      // 5. Description fade in
+        0.7,
+      );
+
+    // ── Animate 3 ảnh nhỏ (nếu có) - CHẠY ĐỒNG THỜI với ảnh lớn ──
+    if (unionGrid) {
+      const gridItems = unionGrid.querySelectorAll(".union-grid-item");
+
+      gridItems.forEach((gridItem) => {
+        const revealElement = gridItem.querySelector(".reveal-element-stagger");
+        const overlay = revealElement?.querySelector(".reveal-overlay");
+        const img = revealElement?.querySelector(".image img");
+
+        if (!overlay || !img) return;
+
+        gsap.set(overlay, {
+          scaleX: 0,
+          transformOrigin: "left",
+        });
+
+        tl.fromTo(
+          overlay,
+          { scaleX: 0, transformOrigin: "left" },
+          {
+            scaleX: 1,
+            duration: 0.6,
+            ease: "power3.out",
+          },
+          0, // ← Chạy cùng lúc với ảnh lớn
+        )
+          .to(
+            overlay,
+            {
+              scaleX: 0,
+              transformOrigin: "right",
+              duration: 0.6,
+              ease: "power2.inOut",
+            },
+            0.7,
+          )
+          .fromTo(
+            img,
+            { opacity: 0, scale: 1.05 },
+            { opacity: 1, scale: 1, duration: 1.0, ease: "power2.out" },
+            0.7,
+          );
+      });
+    }
+
+    // ── Animate content ──
+    tl.to(
+      title,
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "power1.out",
+      },
+      1.5,
+    )
       .to(
         description,
         {
@@ -1116,7 +1167,6 @@ export function unionSectionAnimation() {
         },
         "-=0.5",
       )
-      // 6. Button fade in
       .to(
         button,
         {

@@ -528,9 +528,13 @@ main {
 #footer .footer-main-bottom .footer-bottom-right .social ul li a:hover svg path {
   stroke: var(--color-primary-1);
 }
-#footer .footer-main-bottom .footer-bottom-right .social ul li a.hover-stroke-fill:hover svg path {
+#footer .footer-main-bottom .footer-bottom-right .social ul li a.hover-fill:hover svg path:last-child {
   fill: var(--color-primary-1);
   stroke: transparent;
+}
+#footer .footer-main-bottom .footer-bottom-right .social ul li a svg {
+  width: 20px;
+  height: 20px;
 }
 #footer .footer-main-bottom .footer-bottom-right .social ul li a svg path {
   transition: all 0.3s ease;
@@ -687,7 +691,7 @@ main {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(2, 360px);
-  gap: 32px;
+  gap: 24px;
   margin-bottom: 40px;
 }
 .menu-gallery-item {
@@ -1018,11 +1022,11 @@ main {
   justify-content: center;
   align-items: center;
   padding-top: 120px;
-  padding-bottom: 24px;
+  padding-bottom: 48px;
 }
 .banner-description.scroll-trigger {
   padding-top: 80px;
-  padding-bottom: 24px;
+  padding-bottom: 48px;
   height: auto;
 }
 .banner-description-box {
@@ -1080,12 +1084,12 @@ main {
   line-height: 26px;
   font-family: var(--font-body);
   text-align: center;
-  margin-bottom: 48px;
   opacity: 0;
   color: var(--color-black);
 }
 .banner-description-box .button {
   opacity: 0;
+  margin-top: 48px;
 }
 .banner-description .image-trail {
   position: absolute;
@@ -1346,19 +1350,19 @@ main {
   flex-direction: column;
   gap: 90px 0;
 }
-.union-item {
+.union-row .union-item {
   display: grid;
   grid-template-columns: 4fr 8fr;
-  align-items: flex-end;
-  gap: 32px;
+  align-items: center;
+  gap: 12px;
 }
-.union-item.reverse-row {
+.union-row.reverse-row .union-item {
   grid-template-columns: 8fr 4fr;
 }
-.union-item.reverse-row .union-content {
+.union-row.reverse-row .union-item .union-content {
   grid-column: 2/3;
 }
-.union-item.reverse-row .union-image {
+.union-row.reverse-row .union-item .union-image {
   grid-column: 1/2;
   grid-row: 1/2;
 }
@@ -1396,6 +1400,12 @@ main {
 }
 .union-content .box .description {
   text-align: center;
-  margin-bottom: 120px;
+  margin-bottom: 40px;
   color: var(--color-black);
+}
+.union-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+  margin-top: 24px;
 }

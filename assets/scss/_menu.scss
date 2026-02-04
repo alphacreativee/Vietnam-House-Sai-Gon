@@ -5,7 +5,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 360px);
-    gap: 32px;
+    gap: 24px;
     margin-bottom: 40px;
   }
   &-item {

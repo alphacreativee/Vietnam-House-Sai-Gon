@@ -139,17 +139,21 @@
                       }
                     }
                   }
-                  &.hover-stroke-fill {
+                  &.hover-fill {
                     &:hover {
                       svg {
                         path {
-                          fill: var(--color-primary-1);
-                          stroke: transparent;
+                          &:last-child {
+                            fill: var(--color-primary-1);
+                            stroke: transparent;
+                          }
                         }
                       }
                     }
                   }
                   svg {
+                    width: 20px;
+                    height: 20px;
                     path {
                       transition: all 0.3s ease;
                     }

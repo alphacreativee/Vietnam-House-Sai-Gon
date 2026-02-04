@@ -59,19 +59,23 @@
     flex-direction: column;
     gap: 90px 0;
   }
-  &-item {
-    display: grid;
-    grid-template-columns: 4fr 8fr;
-    align-items: flex-end;
-    gap: 32px;
+  &-row {
+    .union-item {
+      display: grid;
+      grid-template-columns: 4fr 8fr;
+      align-items: center;
+      gap: 12px;
+    }
     &.reverse-row {
-      grid-template-columns: 8fr 4fr;
-      .union-content {
-        grid-column: 2 / 3;
-      }
-      .union-image {
-        grid-column: 1 / 2;
-        grid-row: 1 / 2;
+      .union-item {
+        grid-template-columns: 8fr 4fr;
+        .union-content {
+          grid-column: 2 / 3;
+        }
+        .union-image {
+          grid-column: 1 / 2;
+          grid-row: 1 / 2;
+        }
       }
     }
   }
@@ -111,9 +115,15 @@
       }
       .description {
         text-align: center;
-        margin-bottom: 120px;
+        margin-bottom: 40px;
         color: var(--color-black);
       }
     }
+  }
+  &-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+    margin-top: 24px;
   }
 }
