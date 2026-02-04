@@ -509,7 +509,7 @@ export function menuGalleryReveal() {
     const tag = item.querySelector(".tag"); // Hoặc selector phù hợp với HTML của bạn
 
     if (!overlay || !img) return;
-
+    gsap.set(item, { visibility: "visible" });
     gsap.set(overlay, {
       scaleX: 0,
       transformOrigin: "left",

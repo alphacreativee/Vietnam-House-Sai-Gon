@@ -697,6 +697,7 @@ main {
 .menu-gallery-item {
   position: relative;
   overflow: hidden;
+  visibility: hidden;
 }
 .menu-gallery-item .image {
   width: 100%;

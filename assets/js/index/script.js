@@ -41,6 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
     bannerWithOutHome();
     // changeBackgroundColor();
     swiperLocation();
+    menuGalleryReveal();
   }
 });
 const init = () => {
@@ -49,7 +50,6 @@ const init = () => {
   createFilterTab();
   headerScroll();
   chefSectionAnimation();
-  menuGalleryReveal();
   cursor();
   ctaRun();
   // mousetail();
