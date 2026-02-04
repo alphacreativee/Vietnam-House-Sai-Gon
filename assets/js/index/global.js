@@ -1168,14 +1168,39 @@ export function initScrollToSection() {
 
       const section = document.getElementById(sectionId);
       if (section) {
-        gsap.to(window, {
-          duration: 1,
-          scrollTo: { y: section, offsetY: 0 },
-          ease: "power2.inOut",
+        section.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
         });
       }
     });
   });
+
+  const observerOptions = {
+    root: null,
+    rootMargin: "-50% 0px -50% 0px",
+    threshold: 0,
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const sectionId = entry.target.id;
+
+        addressItems.forEach((item) => {
+          const itemId = item.textContent
+            .trim()
+            .toLowerCase()
+            .replace(/\s+/g, "-");
+
+          if (itemId === sectionId) {
+            addressItems.forEach((el) => el.classList.remove("active"));
+            item.classList.add("active");
+          }
+        });
+      }
+    });
+  }, observerOptions);
 
   addressItems.forEach((item) => {
     const sectionId = item.textContent
@@ -1183,22 +1208,8 @@ export function initScrollToSection() {
       .toLowerCase()
       .replace(/\s+/g, "-");
     const section = document.getElementById(sectionId);
-
     if (section) {
-      ScrollTrigger.create({
-        trigger: section,
-        start: "top center",
-        end: "bottom center",
-        // markers: true,
-        onEnter: () => {
-          addressItems.forEach((el) => el.classList.remove("active"));
-          item.classList.add("active");
-        },
-        onEnterBack: () => {
-          addressItems.forEach((el) => el.classList.remove("active"));
-          item.classList.add("active");
-        },
-      });
+      observer.observe(section);
     }
   });
 }
