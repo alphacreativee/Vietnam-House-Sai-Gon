@@ -844,6 +844,32 @@ main {
   grid-column: span 8;
   grid-row: span 1;
 }
+.menu-gallery.gallery-list .menu-gallery-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(4, 360px);
+  gap: 24px;
+}
+.menu-gallery.gallery-list .menu-gallery-list .menu-gallery-item:nth-child(8n+1) {
+  grid-column: 1/span 1;
+  grid-row: 1/span 2;
+}
+.menu-gallery.gallery-list .menu-gallery-list .menu-gallery-item:nth-child(8n+2) {
+  grid-column: auto/span 2;
+  grid-row: 1/span 1;
+}
+.menu-gallery.gallery-list .menu-gallery-list .menu-gallery-item:nth-child(8n+3), .menu-gallery.gallery-list .menu-gallery-list .menu-gallery-item:nth-child(8n+4), .menu-gallery.gallery-list .menu-gallery-list .menu-gallery-item:nth-child(8n+5), .menu-gallery.gallery-list .menu-gallery-list .menu-gallery-item:nth-child(8n+6) {
+  grid-column: auto/span 1;
+  grid-row: auto/span 1;
+}
+.menu-gallery.gallery-list .menu-gallery-list .menu-gallery-item:nth-child(8n+7) {
+  grid-column: auto/span 1;
+  grid-row: auto/span 2;
+}
+.menu-gallery.gallery-list .menu-gallery-list .menu-gallery-item:nth-child(8n+8) {
+  grid-column: auto/span 2;
+  grid-row: auto/span 1;
+}
 
 #cta {
   position: fixed;
