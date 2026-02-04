@@ -1,6 +1,6 @@
 .chef {
   overflow: hidden;
-  padding: 48px 48px 48px 0;
+  padding: 120px 48px 120px 0;
   &-container {
     display: grid;
     grid-template-columns: 8fr 4fr;
@@ -54,8 +54,5 @@
   }
   &-button {
     margin-top: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 }

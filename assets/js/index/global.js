@@ -506,6 +506,7 @@ export function menuGalleryReveal() {
   galleryItems.forEach((item) => {
     const overlay = item.querySelector(".reveal-overlay");
     const img = item.querySelector(".image img");
+    const tag = item.querySelector(".tag"); // Hoặc selector phù hợp với HTML của bạn
 
     if (!overlay || !img) return;
 
@@ -513,6 +514,14 @@ export function menuGalleryReveal() {
       scaleX: 0,
       transformOrigin: "left",
     });
+
+    // Set initial state cho tag
+    if (tag) {
+      gsap.set(tag, {
+        opacity: 0,
+        y: 20,
+      });
+    }
 
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -531,7 +540,6 @@ export function menuGalleryReveal() {
         ease: "power3.out",
       },
     )
-
       .to(
         overlay,
         {
@@ -542,13 +550,26 @@ export function menuGalleryReveal() {
         },
         "+=0.1",
       )
-
       .fromTo(
         img,
         { opacity: 0, scale: 1.05 },
         { opacity: 1, scale: 1, duration: 1.0, ease: "power2.out" },
         "-=0.6",
       );
+
+    // Animate tag sau khi image hiện
+    if (tag) {
+      tl.to(
+        tag,
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power2.out",
+        },
+        "-=0.4", // Overlap một chút với animation của img
+      );
+    }
   });
 }
 export function cursor() {
@@ -1106,5 +1127,29 @@ export function unionSectionAnimation() {
         },
         "-=0.5",
       );
+  });
+}
+export function headerMobile() {
+  if (window.innerWidth < 992) return;
+  const hamburger = document.getElementById("hamburger");
+  const subMenu = document.querySelector(".header-sub-menu");
+  hamburger.addEventListener("click", function () {
+    this.classList.toggle("active");
+    subMenu.classList.toggle("active");
+
+    // if (this.classList.contains("active")) {
+    //   // document.body.classList.add("overflow-hidden");
+
+    //   if (header) {
+    //     const hadLightTheme = header.classList.contains("header-theme-light");
+    //     header.classList.add("header-theme-light");
+
+    //     if (!hadLightTheme) {
+    //       header.setAttribute("data-hamburger-light", "true");
+    //     }
+    //   }
+    // } else {
+    //   document.body.classList.remove("overflow-hidden");
+    // }
   });
 }

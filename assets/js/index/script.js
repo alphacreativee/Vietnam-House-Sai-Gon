@@ -14,6 +14,7 @@ import {
   changeBackgroundColor,
   swiperLocation,
   unionSectionAnimation,
+  headerMobile,
 } from "../../main/js/global.min.js";
 ("use strict");
 $ = jQuery;
@@ -50,8 +51,9 @@ const init = () => {
   menuGalleryReveal();
   cursor();
   ctaRun();
-  mousetail();
+  // mousetail();
   unionSectionAnimation();
+  headerMobile();
 };
 preloadImages("img").then(() => {
   init();
@@ -108,3 +110,32 @@ if (document.readyState === "loading") {
 
 // Chạy lại khi tất cả resources load xong
 window.addEventListener("load", initFooter);
+function scrollToSection(sectionId, clickedElement) {
+  // Remove active class từ tất cả items
+  const allItems = document.querySelectorAll(".fixed-address-item");
+  allItems.forEach((item) => item.classList.remove("active"));
+
+  // Thêm active class cho item được click
+  clickedElement.classList.add("active");
+
+  // Scroll tới section
+  const section = document.getElementById(sectionId);
+  if (section) {
+    section.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }
+}
+
+// Thêm event listeners
+document.addEventListener("DOMContentLoaded", function () {
+  const addressItems = document.querySelectorAll(".fixed-address-item");
+
+  addressItems.forEach((item) => {
+    item.addEventListener("click", function () {
+      const text = this.textContent.trim().toLowerCase().replace(/\s+/g, "-");
+      scrollToSection(text, this);
+    });
+  });
+});

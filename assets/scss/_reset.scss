@@ -94,14 +94,11 @@ body {
 }
 main {
   min-height: 100vh;
-  margin-bottom: var(--footer-height);
+  // margin-bottom: var(--footer-height);
   position: relative;
   z-index: 4;
-  background-color: var(--color-primary-2);
+  background-color: var(--color-white);
   will-change: background-color;
-  &.change-background-color {
-    background-color: var(--color-primary-2);
-  }
 }
 ::selection {
   background-color: var(--color-primary-1);

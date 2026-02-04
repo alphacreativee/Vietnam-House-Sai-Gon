@@ -41,7 +41,7 @@
     }
   }
   &.column-layout-2 {
-    padding-bottom: 80px;
+    padding-bottom: 0;
     .menu-gallery-list {
       grid-template-columns: 1fr 1fr 1fr 1fr;
       grid-template-rows: repeat(2, 400px);
