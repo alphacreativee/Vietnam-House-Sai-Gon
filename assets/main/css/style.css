@@ -1212,6 +1212,9 @@ main {
   z-index: 3;
   background-color: var(--color-primary-2);
 }
+.all-location .location-item {
+  visibility: hidden;
+}
 .all-location .location-item .reveal-element-stagger {
   height: 360px;
 }
@@ -1266,6 +1269,7 @@ main {
   margin-top: 0;
   transform: translateY(-180px);
   transition: all 0.3s ease;
+  visibility: hidden;
 }
 .all-location .swiper-arrow:hover .global::after {
   transform: scaleX(1);

@@ -94,6 +94,7 @@
     }
   }
   .location-item {
+    visibility: hidden;
     .reveal-element-stagger {
       height: 360px;
     }
@@ -150,6 +151,7 @@
     margin-top: 0;
     transform: translateY(-180px);
     transition: all 0.3s ease;
+    visibility: hidden;
     &:hover {
       .global {
         &::after {

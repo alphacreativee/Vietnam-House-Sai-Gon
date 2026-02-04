@@ -824,6 +824,7 @@ export function swiperLocation() {
 
   // Animate swiper arrows
   if (prevArrow && nextArrow) {
+    gsap.set([prevArrow, nextArrow], { visibility: "visible" });
     gsap.set([prevArrow, nextArrow], {
       opacity: 0,
     });
@@ -894,7 +895,7 @@ export function swiperLocation() {
     const button = item.querySelector(".location-content .button");
 
     if (!overlay || !img || !h4 || !desc || !button || !tagLocation) return;
-
+    gsap.set(item, { visibility: "visible" });
     gsap.set(overlay, {
       scaleX: 0,
       transformOrigin: "left",
