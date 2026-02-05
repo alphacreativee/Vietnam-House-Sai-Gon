@@ -1633,3 +1633,37 @@ main {
 #booking .booking-container.active {
   clip-path: inset(0% 0% 0% 0%);
 }
+#booking .booking-container form .group-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+#booking .booking-container form .group-row:last-child {
+  margin-bottom: 0;
+}
+#booking .booking-container form .group-row.full {
+  grid-template-columns: 1fr;
+}
+#booking .booking-container form .group-row .row-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+#booking .booking-container form .group-row .row-item label {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--color-primary);
+}
+#booking .booking-container form .group-row .row-item input {
+  box-shadow: none;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid var(--color-primary);
+  padding-bottom: 4px;
+}
+#booking .booking-container form .group-row .row-item input::placeholder {
+  font-size: 16px;
+  line-height: 26px;
+  color: rgba(0, 44, 72, 0.3);
+}

@@ -1,2 +1,47 @@
 <div class="booking-overlay"></div>
-<div class="booking-container"></div>
+<div class="booking-container">
+  <form action="">
+    <div class="group-row full">
+      <div class="row-item">
+        <label for="name">Full Name*</label>
+        <input type="text" placeholder="Your name" name="name" require />
+      </div>
+    </div>
+    <div class="group-row full">
+      <div class="row-item">
+        <label for="phone">Phone Number*</label>
+        <input
+          placeholder="Your phone"
+          name="phone"
+          type="tel"
+          id="phone"
+          require
+        />
+      </div>
+    </div>
+    <div class="group-row full">
+      <div class="row-item">
+        <label for="email">Email Address</label>
+        <input
+          name="email"
+          type="email"
+          id="email"
+          pattern=".+@example\.com"
+          size="30"
+          required
+          placeholder="Your email"
+        />
+      </div>
+    </div>
+    <div class="group-row">
+      <div class="row-item">
+        <label for="date">Date*</label>
+        <input type="text" placeholder="Select Date" name="date" require />
+      </div>
+      <div class="row-item">
+        <label for="time">Time*</label>
+        <input type="text" placeholder="Select Time" name="time" require />
+      </div>
+    </div>
+  </form>
+</div>
