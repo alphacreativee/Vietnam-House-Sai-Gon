@@ -413,6 +413,11 @@ main {
   font-size: 20px;
   line-height: 28px;
   color: var(--color-primary);
+  font-weight: normal;
+  transition: all 0.3s ease;
+}
+#header .header-menu ul li a.active {
+  font-weight: bold;
 }
 
 #footer .footer-container {
