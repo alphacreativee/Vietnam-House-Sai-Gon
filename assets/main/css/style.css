@@ -415,6 +415,23 @@ main {
   color: var(--color-primary);
   font-weight: normal;
   transition: all 0.3s ease;
+  position: relative;
+}
+#header .header-menu ul li a::before {
+  content: "";
+  position: absolute;
+  left: 1px;
+  bottom: -1px;
+  width: 100%;
+  height: 1px;
+  background-color: var(--color-primary);
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+#header .header-menu ul li a:hover::before {
+  transform: scaleX(1);
+  transform-origin: bottom left;
 }
 #header .header-menu ul li a.active {
   font-weight: bold;
@@ -572,6 +589,34 @@ main {
   overflow: hidden;
   padding-right: 48px;
 }
+.hero.content-direction {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 0;
+  padding-top: 80px;
+  height: auto;
+}
+.hero.content-direction .hero-container {
+  grid-template-columns: 1fr;
+  max-width: 83.3333333333%;
+}
+.hero.content-direction .hero-image {
+  height: 430px;
+}
+.hero.content-direction .hero-content {
+  margin-top: 48px;
+  padding-left: 0;
+}
+.hero.content-direction .hero-title {
+  display: inline-block;
+  margin: 0 auto 40px;
+}
+.hero.content-direction .box-content {
+  text-align: center;
+  padding-left: 8.3333333333%;
+  padding-right: 8.3333333333%;
+}
 .hero-container {
   display: grid;
   grid-template-columns: 8fr 4fr;
@@ -635,6 +680,33 @@ main {
 .chef {
   overflow: hidden;
   padding: 120px 48px 120px 0;
+}
+.chef.chef-reverse-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 0;
+}
+.chef.chef-reverse-row .chef-container {
+  grid-template-columns: 4fr 8fr;
+  max-width: 83.3333333333%;
+}
+.chef.chef-reverse-row .chef-image-wrapper {
+  grid-column: 1/2;
+  grid-row: 1/2;
+}
+.chef.chef-reverse-row .chef-content {
+  grid-column: 2/3;
+  grid-row: 1/2;
+  padding-right: 0;
+}
+.chef.chef-reverse-row .chef-description ul {
+  list-style-type: disc;
+  padding-left: 24px;
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 .chef-container {
   display: grid;
@@ -1306,7 +1378,7 @@ main {
   z-index: 1;
 }
 .all-location .swiper-arrow.swiper-button-lock {
-  opacity: 0;
+  opacity: 0 !important;
 }
 .all-location .swiper-arrow svg {
   width: auto;
@@ -1444,4 +1516,18 @@ main {
   grid-template-columns: 1fr 1fr 1fr;
   gap: 24px;
   margin-top: 24px;
+}
+
+.gallery-loop {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.gallery-loop-content {
+  max-width: 50%;
+  text-align: center;
+}
+.gallery-loop-content .title {
+  max-width: 70%;
+  margin: 0 auto 24px;
 }

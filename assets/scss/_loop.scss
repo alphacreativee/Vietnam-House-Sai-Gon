@@ -1,0 +1,14 @@
+.gallery-loop {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &-content {
+    max-width: 50%;
+    text-align: center;
+
+    .title {
+      max-width: 70%;
+      margin: 0 auto 24px;
+    }
+  }
+}

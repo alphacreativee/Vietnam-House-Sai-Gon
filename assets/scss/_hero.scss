@@ -3,6 +3,34 @@
   height: 100svh;
   overflow: hidden;
   padding-right: 48px;
+  &.content-direction {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 0;
+    padding-top: 80px;
+    height: auto;
+    .hero-container {
+      grid-template-columns: 1fr;
+      max-width: calc(calc(10 / 12) * 100%);
+    }
+    .hero-image {
+      height: 430px;
+    }
+    .hero-content {
+      margin-top: 48px;
+      padding-left: 0;
+    }
+    .hero-title {
+      display: inline-block;
+      margin: 0 auto 40px;
+    }
+    .box-content {
+      text-align: center;
+      padding-left: calc(calc(1 / 12) * 100%);
+      padding-right: calc(calc(1 / 12) * 100%);
+    }
+  }
   &-container {
     display: grid;
     grid-template-columns: 8fr 4fr;

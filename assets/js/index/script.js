@@ -16,6 +16,7 @@ import {
   unionSectionAnimation,
   headerMobile,
   initScrollToSection,
+  galleryLoop,
 } from "../../main/js/global.min.js";
 ("use strict");
 $ = jQuery;
@@ -56,6 +57,7 @@ const init = () => {
   unionSectionAnimation();
   headerMobile();
   initScrollToSection();
+  galleryLoop();
 };
 preloadImages("img").then(() => {
   init();

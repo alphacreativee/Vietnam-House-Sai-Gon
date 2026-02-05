@@ -894,17 +894,10 @@ export function swiperLocation() {
     const desc = item.querySelector(".location-content .desc");
     const button = item.querySelector(".location-content .button");
 
-    if (!overlay || !img || !h4 || !desc || !button || !tagLocation) return;
-    gsap.set(item, { visibility: "visible" });
-    gsap.set(overlay, {
-      scaleX: 0,
-      transformOrigin: "left",
-    });
+    // Chỉ cần item tồn tại là đủ để bắt đầu
+    if (!item) return;
 
-    gsap.set([h4, desc, button, tagLocation], {
-      opacity: 0,
-      y: 20,
-    });
+    gsap.set(item, { visibility: "visible" });
 
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -915,16 +908,15 @@ export function swiperLocation() {
       delay: 0.3,
     });
 
-    tl.fromTo(
-      overlay,
-      { scaleX: 0, transformOrigin: "left" },
-      {
-        scaleX: 1,
-        duration: 0.6,
-        ease: "power3.out",
-      },
-    )
-      .to(
+    // Animate overlay nếu tồn tại
+    if (overlay) {
+      gsap.set(overlay, { scaleX: 0, transformOrigin: "left" });
+
+      tl.fromTo(
+        overlay,
+        { scaleX: 0, transformOrigin: "left" },
+        { scaleX: 1, duration: 0.6, ease: "power3.out" },
+      ).to(
         overlay,
         {
           scaleX: 0,
@@ -933,15 +925,40 @@ export function swiperLocation() {
           ease: "power2.inOut",
         },
         "+=0.1",
-      )
-      .fromTo(
+      );
+    }
+
+    // Animate image nếu tồn tại
+    if (img) {
+      tl.fromTo(
         img,
         { opacity: 0, scale: 1.05 },
         { opacity: 1, scale: 1, duration: 1.0, ease: "power2.out" },
-        "-=0.6",
-      )
-      .to(
-        h4,
+        overlay ? "-=0.6" : 0, // Điều chỉnh timing dựa trên overlay có tồn tại không
+      );
+    }
+
+    // Animate text elements nếu tồn tại
+    const textElements = [];
+    if (h4) {
+      gsap.set(h4, { opacity: 0, y: 20 });
+      textElements.push(h4);
+    }
+    if (tagLocation) {
+      gsap.set(tagLocation, { opacity: 0, y: 20 });
+      textElements.push(tagLocation);
+    }
+    if (desc) {
+      gsap.set(desc, { opacity: 0, y: 20 });
+    }
+    if (button) {
+      gsap.set(button, { opacity: 0, y: 20 });
+    }
+
+    // Animate h4 và tagLocation cùng lúc
+    if (textElements.length > 0) {
+      tl.to(
+        textElements,
         {
           opacity: 1,
           y: 0,
@@ -949,18 +966,12 @@ export function swiperLocation() {
           ease: "power2.out",
         },
         0.9,
-      )
-      .to(
-        tagLocation,
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.6,
-          ease: "power2.out",
-        },
-        0.9,
-      )
-      .to(
+      );
+    }
+
+    // Animate desc
+    if (desc) {
+      tl.to(
         desc,
         {
           opacity: 1,
@@ -969,8 +980,12 @@ export function swiperLocation() {
           ease: "power2.out",
         },
         "-=0.4",
-      )
-      .to(
+      );
+    }
+
+    // Animate button
+    if (button) {
+      tl.to(
         button,
         {
           opacity: 1,
@@ -980,6 +995,7 @@ export function swiperLocation() {
         },
         "-=0.4",
       );
+    }
   });
 }
 export function unionSectionAnimation() {
@@ -1263,4 +1279,50 @@ export function initScrollToSection() {
       observer.observe(section);
     }
   });
+}
+export function galleryLoop() {
+  // Gallery Loop Animation - Advanced
+  const galleryLoop = document.querySelector(".gallery-loop");
+
+  if (galleryLoop) {
+    const title = galleryLoop.querySelector(".title");
+    const description = galleryLoop.querySelector(".description");
+
+    // Set initial state
+    gsap.set(title, {
+      opacity: 0,
+      y: 20,
+    });
+
+    gsap.set(description, {
+      opacity: 0,
+      y: 30,
+    });
+
+    // Create timeline
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: galleryLoop,
+        start: "top 65%",
+        toggleActions: "play none none none",
+      },
+    });
+
+    // Animate với reveal effect cho title
+    tl.to(title, {
+      opacity: 1,
+      y: 0,
+      duration: 1.0,
+      ease: "power3.out",
+    }).to(
+      description,
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "power2.out",
+      },
+      "-=0.5",
+    );
+  }
 }
