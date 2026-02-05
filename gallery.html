@@ -105,6 +105,14 @@
         });
     </script>
     <div id="cta"></div>
+    <script>
+      fetch("./components/booking.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("booking").innerHTML = data;
+        });
+    </script>
+    <div id="booking"></div>
     <!-- end cta -->
     <main class="change-background-color">
       <section class="banner-description mouse-trail">

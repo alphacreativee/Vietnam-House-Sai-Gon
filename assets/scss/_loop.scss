@@ -1,14 +1,31 @@
 .gallery-loop {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  padding-bottom: 120px;
   &-content {
     max-width: 50%;
     text-align: center;
-
+    margin: 0 auto 48px;
     .title {
       max-width: 70%;
       margin: 0 auto 24px;
     }
   }
+  .reveal-element-stagger {
+    position: relative;
+    overflow: hidden;
+    .reveal-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: var(--color-primary-2);
+      z-index: 4;
+    }
+  }
+  .marquee-item {
+    visibility: hidden;
+  }
 }
+// .swiper-loop .swiper-wrapper.paused {
+//   transition: none !important;
+// }

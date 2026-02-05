@@ -23,24 +23,23 @@
 
     @media (max-width: 991px) {
       right: 24px;
+    }
+    .cta-booking {
+      transform: translateX(60px);
+      opacity: 0;
+      transition:
+        transform 0.5s ease,
+        opacity 0.3s ease 0.15s; // Sau 0.15s (khoảng 18px) thì bắt đầu mờ
+      transition-delay: 0s;
+    }
 
-      .cta-booking {
-        transform: translateX(60px);
-        opacity: 0;
-        transition:
-          transform 0.5s ease,
-          opacity 0.3s ease 0.15s; // Sau 0.15s (khoảng 18px) thì bắt đầu mờ
-        transition-delay: 0s;
-      }
-
-      .cta-wrapper {
-        transform: translateX(60px);
-        opacity: 0;
-        transition:
-          transform 0.5s ease,
-          opacity 0.3s ease 0.15s; // Sau 0.15s (khoảng 18px) thì bắt đầu mờ
-        transition-delay: 0.15s;
-      }
+    .cta-wrapper {
+      transform: translateX(60px);
+      opacity: 0;
+      transition:
+        transform 0.5s ease,
+        opacity 0.3s ease 0.15s; // Sau 0.15s (khoảng 18px) thì bắt đầu mờ
+      transition-delay: 0.15s;
     }
   }
 
@@ -182,27 +181,37 @@
   }
 
   .cta-booking {
-    width: 54px;
-    height: 54px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
-    background-color: var(--color-primary-3);
-    display: none;
+    background-color: var(--color-primary-2);
     opacity: 1;
-
-    @media (max-width: 991px) {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 54px;
-      transform: translateX(0);
-      transition:
-        transform 0.5s ease,
-        opacity 0.3s ease;
-      transition-delay: 0s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 48px;
+    transform: translateX(0);
+    transition:
+      background 0.3s ease,
+      transform 0.5s ease,
+      opacity 0.3s ease;
+    transition-delay: 0s;
+    margin-top: 12px;
+    cursor: pointer;
+    svg {
+      path,
+      rect {
+        transition: all 0.3s ease;
+      }
     }
-
     &:hover {
       background-color: var(--color-black);
+      svg {
+        path,
+        rect {
+          stroke: var(--color-primary-2);
+        }
+      }
     }
   }
 }

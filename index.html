@@ -115,6 +115,14 @@
     </script>
     <div id="cta"></div>
     <!-- end cta -->
+    <script>
+      fetch("./components/booking.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("booking").innerHTML = data;
+        });
+    </script>
+    <div id="booking"></div>
     <main>
       <section class="hero">
         <div class="hero-container">

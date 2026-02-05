@@ -1,0 +1,37 @@
+#booking {
+  .booking {
+    &-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.9);
+      z-index: 788;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      &.active {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+    &-container {
+      position: fixed;
+      background-color: var(--color-white);
+      // background-color: red;
+      top: 0;
+      right: 0;
+      height: 100vh;
+      z-index: 789;
+      width: calc(calc(4 / 12) * 100% + 32px);
+      padding: 120px 40px 40px;
+      transition: all 0.3s ease;
+      will-change: clip-path;
+      clip-path: inset(0 0 0 100%);
+      &.active {
+        clip-path: inset(0% 0% 0% 0%);
+      }
+    }
+  }
+}

@@ -1197,27 +1197,79 @@ export function unionSectionAnimation() {
   });
 }
 export function headerMobile() {
-  if (window.innerWidth < 992) return;
   const hamburger = document.getElementById("hamburger");
   const subMenu = document.querySelector(".header-sub-menu");
+  const overlayMenu = document.querySelector(".header-overlay");
+  const bookingBtn = document.getElementById("booking-btn");
+  const bookingContainer = document.querySelector(".booking-container");
+  const bookingOverlay = document.querySelector(".booking-overlay");
+
+  function lockScroll() {
+    if (window.lenis) {
+      window.lenis.stop(); // ← DỪNG LENIS
+    }
+    const scrollbarWidth =
+      window.innerWidth - document.documentElement.clientWidth;
+    document.body.style.paddingRight = `${scrollbarWidth}px`;
+    console.log(scrollbarWidth);
+  }
+
+  function unlockScroll() {
+    if (window.lenis) {
+      window.lenis.start(); // ← KHỞI ĐỘNG LẠI LENIS
+    }
+    document.body.style.paddingRight = "";
+  }
+
+  // Hamburger click
   hamburger.addEventListener("click", function () {
-    this.classList.toggle("active");
-    subMenu.classList.toggle("active");
+    if (this.classList.contains("active-booking")) {
+      this.classList.remove("active-booking");
+      bookingBtn.classList.remove("active");
+      bookingContainer.classList.remove("active");
+      bookingOverlay.classList.remove("active");
+      unlockScroll();
+    } else {
+      this.classList.toggle("active");
+      subMenu.classList.toggle("active");
+      overlayMenu.classList.toggle("active");
 
-    // if (this.classList.contains("active")) {
-    //   // document.body.classList.add("overflow-hidden");
+      if (this.classList.contains("active")) {
+        lockScroll();
+      } else {
+        unlockScroll();
+      }
+    }
+  });
 
-    //   if (header) {
-    //     const hadLightTheme = header.classList.contains("header-theme-light");
-    //     header.classList.add("header-theme-light");
+  // Booking button click
+  bookingBtn.addEventListener("click", function () {
+    this.classList.add("active");
+    hamburger.classList.add("active-booking");
+    bookingContainer.classList.add("active");
+    bookingOverlay.classList.add("active");
 
-    //     if (!hadLightTheme) {
-    //       header.setAttribute("data-hamburger-light", "true");
-    //     }
-    //   }
-    // } else {
-    //   document.body.classList.remove("overflow-hidden");
-    // }
+    hamburger.classList.remove("active");
+    subMenu.classList.remove("active");
+    overlayMenu.classList.remove("active");
+
+    lockScroll();
+  });
+
+  // Click overlay để đóng
+  overlayMenu.addEventListener("click", function () {
+    hamburger.classList.remove("active");
+    subMenu.classList.remove("active");
+    overlayMenu.classList.remove("active");
+    unlockScroll();
+  });
+
+  bookingOverlay.addEventListener("click", function () {
+    hamburger.classList.remove("active-booking");
+    bookingBtn.classList.remove("active");
+    bookingContainer.classList.remove("active");
+    bookingOverlay.classList.remove("active");
+    unlockScroll();
   });
 }
 export function initScrollToSection() {
@@ -1325,4 +1377,133 @@ export function galleryLoop() {
       "-=0.5",
     );
   }
+  document.querySelectorAll(".gallery-loop").forEach((element) => {
+    if (element.dataset.scriptInitialized) return;
+    element.dataset.scriptInitialized = "true";
+
+    document
+      .querySelectorAll("[data-marquee-scroll-direction-target]")
+      .forEach((marquee) => {
+        // Query marquee elements
+        const marqueeContent = marquee.querySelector(
+          "[data-marquee-collection-target]",
+        );
+        const marqueeScroll = marquee.querySelector(
+          "[data-marquee-scroll-target]",
+        );
+        if (!marqueeContent || !marqueeScroll) return;
+
+        // Get data attributes
+        const {
+          marqueeSpeed: speed,
+          marqueeDirection: direction,
+          marqueeDuplicate: duplicate,
+          marqueeScrollSpeed: scrollSpeed,
+        } = marquee.dataset;
+
+        // Convert data attributes to usable types
+        const marqueeSpeedAttr = parseFloat(speed);
+        const marqueeDirectionAttr = direction === "right" ? 1 : -1;
+        const duplicateAmount = parseInt(duplicate || 0);
+        const scrollSpeedAttr = parseFloat(scrollSpeed);
+        const speedMultiplier =
+          window.innerWidth < 479 ? 0.25 : window.innerWidth < 991 ? 0.5 : 1;
+
+        let marqueeSpeed =
+          marqueeSpeedAttr *
+          (marqueeContent.offsetWidth / window.innerWidth) *
+          speedMultiplier;
+
+        // Precompute styles for the scroll container
+        marqueeScroll.style.marginLeft = `${scrollSpeedAttr * -1}%`;
+        marqueeScroll.style.width = `${scrollSpeedAttr * 2 + 100}%`;
+
+        // Duplicate marquee content
+        if (duplicateAmount > 0) {
+          const fragment = document.createDocumentFragment();
+          for (let i = 0; i < duplicateAmount; i++) {
+            fragment.appendChild(marqueeContent.cloneNode(true));
+          }
+          marqueeScroll.appendChild(fragment);
+        }
+
+        // GSAP animation for marquee content
+        const marqueeItems = marquee.querySelectorAll(
+          "[data-marquee-collection-target]",
+        );
+        const animation = gsap
+          .to(marqueeItems, {
+            xPercent: -100,
+            repeat: -1,
+            duration: marqueeSpeed,
+            ease: "linear",
+          })
+          .totalProgress(0.5);
+
+        animation.timeScale(marqueeDirectionAttr);
+        animation.play();
+        marquee.setAttribute("data-marquee-status", "normal");
+
+        // Hover pause/play - THÊM PHẦN NÀY
+        marquee.addEventListener("mouseenter", () => {
+          animation.pause();
+        });
+
+        marquee.addEventListener("mouseleave", () => {
+          animation.play();
+        });
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: marquee,
+            start: "0% 100%",
+            end: "100% 0%",
+            scrub: 0,
+          },
+        });
+      });
+  });
+  // Reveal tất cả items cùng lúc với stagger
+  ScrollTrigger.create({
+    trigger: ".gallery-loop-list",
+    start: "top 70%",
+    once: true,
+    onEnter: () => {
+      const items = document.querySelectorAll(".marquee-item");
+
+      items.forEach((item, index) => {
+        const overlay = item.querySelector(".reveal-overlay");
+        const img = item.querySelector("img");
+        gsap.set(item, { visibility: "visible" });
+
+        if (!overlay || !img) return;
+
+        const tl = gsap.timeline({
+          delay: index * 0,
+        });
+
+        tl.fromTo(
+          overlay,
+          { scaleX: 0, transformOrigin: "left" },
+          { scaleX: 1, duration: 0.6, ease: "power3.out" },
+        )
+          .to(
+            overlay,
+            {
+              scaleX: 0,
+              transformOrigin: "right",
+              duration: 0.6,
+              ease: "power2.inOut",
+            },
+            "+=0.1",
+          )
+          .fromTo(
+            img,
+            { opacity: 0, scale: 1.05 },
+            { opacity: 1, scale: 1, duration: 1.0, ease: "power2.out" },
+            "-=0.6",
+          );
+      });
+    },
+  });
 }

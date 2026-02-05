@@ -22,6 +22,7 @@ import {
 $ = jQuery;
 
 const lenis = new Lenis();
+window.lenis = lenis;
 lenis.on("scroll", ScrollTrigger.update);
 gsap.ticker.add((time) => {
   lenis.raf(time * 1000);
@@ -58,6 +59,7 @@ const init = () => {
   headerMobile();
   initScrollToSection();
   galleryLoop();
+  // marquee();
 };
 preloadImages("img").then(() => {
   init();

@@ -106,6 +106,14 @@
     </script>
     <div id="cta"></div>
     <!-- end cta -->
+    <script>
+      fetch("./components/booking.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("booking").innerHTML = data;
+        });
+    </script>
+    <div id="booking"></div>
     <main class="change-background-color">
       <section class="hero content-direction">
         <div class="hero-container">
@@ -309,6 +317,52 @@
             technique and precision. Rooted in tradition yet elevated in form,
             every plate becomes a quiet tribute to Vietnam’s culinary identity -
             timeless, elegant, and deeply authentic.
+          </div>
+        </div>
+        <div class="gallery-loop-list">
+          <div class="marquee-component">
+            <div
+              data-marquee-duplicate="2"
+              data-marquee-scroll-direction-target=""
+              data-marquee-direction="left"
+              data-marquee-status="normal"
+              data-marquee-speed="30"
+              class="marquee-wrap"
+            >
+              <div class="marquee-scroll d-flex" data-marquee-scroll-target="">
+                <div
+                  class="marquee-list-wrap"
+                  data-marquee-collection-target=""
+                >
+                  <div class="marquee-list">
+                    <div class="marquee-item">
+                      <div class="image reveal-element-stagger">
+                        <div class="reveal-overlay"></div>
+                        <img src="./assets/images/del/mon-1.webp" alt="" />
+                      </div>
+                    </div>
+                    <div class="marquee-item">
+                      <div class="image reveal-element-stagger">
+                        <div class="reveal-overlay"></div>
+                        <img src="./assets/images/del/mon-2.webp" alt="" />
+                      </div>
+                    </div>
+                    <div class="marquee-item">
+                      <div class="image reveal-element-stagger">
+                        <div class="reveal-overlay"></div>
+                        <img src="./assets/images/del/mon-3.webp" alt="" />
+                      </div>
+                    </div>
+                    <div class="marquee-item">
+                      <div class="image reveal-element-stagger">
+                        <div class="reveal-overlay"></div>
+                        <img src="./assets/images/del/mon-4.webp" alt="" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

@@ -35,7 +35,8 @@
           position: absolute;
           inset: -18px -14px;
         }
-        &.active {
+        &.active,
+        &.active-booking {
           span {
             &:nth-child(1) {
               top: 7.5px;
@@ -126,6 +127,22 @@
             }
           }
         }
+      }
+    }
+    &-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.9);
+      z-index: 788;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      &.active {
+        opacity: 1;
+        visibility: visible;
       }
     }
   }
