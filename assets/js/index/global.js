@@ -424,79 +424,8 @@ export function chefSectionAnimation() {
   // masterTl.timeScale(0.7); // uncomment để chậm lại khi test
 }
 
-// export function menuGalleryReveal() {
-//   const galleryLists = document.querySelectorAll(".menu-gallery-list");
-
-//   if (!galleryLists.length) return;
-
-//   galleryLists.forEach((list) => {
-//     const galleryItems = list.querySelectorAll(
-//       ".menu-gallery-item.reveal-element-stagger",
-//     );
-
-//     if (!galleryItems.length) return;
-
-//     // Tạo master timeline với ScrollTrigger cho từng list
-//     const masterTl = gsap.timeline({
-//       scrollTrigger: {
-//         trigger: list,
-//         start: "top 80%",
-//         toggleActions: "play none none none",
-//         // markers: true,
-//       },
-//     });
-
-//     galleryItems.forEach((item, index) => {
-//       const overlay = item.querySelector(".reveal-overlay");
-//       const img = item.querySelector(".image img");
-
-//       if (!overlay || !img) return;
-
-//       // Set initial state
-//       gsap.set(overlay, {
-//         scaleX: 0,
-//         transformOrigin: "left",
-//       });
-
-//       // Tạo sub-timeline cho từng item
-//       const tl = gsap.timeline();
-
-//       tl
-//         // 1. Overlay quét từ TRÁI → PHẢI
-//         .fromTo(
-//           overlay,
-//           { scaleX: 0, transformOrigin: "left" },
-//           {
-//             scaleX: 1,
-//             duration: 0.6,
-//             ease: "power3.out",
-//           },
-//         )
-//         // 2. Overlay rút từ PHẢI → TRÁI
-//         .to(
-//           overlay,
-//           {
-//             scaleX: 0,
-//             transformOrigin: "right",
-//             duration: 0.6,
-//             ease: "power2.inOut",
-//           },
-//           "+=0.1",
-//         )
-//         // 3. Hình ảnh scale nhẹ + fade in
-//         .fromTo(
-//           img,
-//           { opacity: 0, scale: 1.05 },
-//           { opacity: 1, scale: 1, duration: 1.0, ease: "power2.out" },
-//           "-=0.6",
-//         );
-
-//       // Add sub-timeline vào master với stagger
-//       masterTl.add(tl, index * 0.15);
-//     });
-//   });
-// }
 export function menuGalleryReveal() {
+  console.log("123");
   const galleryItems = document.querySelectorAll(
     ".menu-gallery-item.reveal-element-stagger",
   );
@@ -528,6 +457,7 @@ export function menuGalleryReveal() {
         trigger: item,
         start: "top 70%",
         toggleActions: "play none none none",
+        // markers: true,
       },
     });
 
@@ -1204,73 +1134,101 @@ export function headerMobile() {
   const bookingContainer = document.querySelector(".booking-container");
   const bookingOverlay = document.querySelector(".booking-overlay");
 
+  // Debug ngay đầu để check element có tồn tại không
+  console.log({
+    hamburger: !!hamburger,
+    bookingBtn: !!bookingBtn,
+    bookingContainer: !!bookingContainer,
+    bookingOverlay: !!bookingOverlay,
+  });
+
+  if (!hamburger || !bookingBtn) {
+    console.error(
+      "Không tìm thấy hamburger hoặc booking-btn! Kiểm tra ID và DOM.",
+    );
+    return; // Dừng hàm nếu thiếu element
+  }
+
   function lockScroll() {
-    if (window.lenis) {
-      window.lenis.stop(); // ← DỪNG LENIS
-    }
+    if (window.lenis) window.lenis.stop();
     const scrollbarWidth =
       window.innerWidth - document.documentElement.clientWidth;
     document.body.style.paddingRight = `${scrollbarWidth}px`;
-    console.log(scrollbarWidth);
+    document.body.style.overflow = "hidden"; // Thêm để chắc chắn lock
   }
 
   function unlockScroll() {
-    if (window.lenis) {
-      window.lenis.start(); // ← KHỞI ĐỘNG LẠI LENIS
-    }
+    if (window.lenis) window.lenis.start();
     document.body.style.paddingRight = "";
+    document.body.style.overflow = "";
   }
 
   // Hamburger click
-  hamburger.addEventListener("click", function () {
-    if (this.classList.contains("active-booking")) {
-      this.classList.remove("active-booking");
+  hamburger.addEventListener(
+    "click",
+    function (e) {
+      // Ngăn default nếu cần, nhưng thường không cần
+      if (this.classList.contains("active-booking")) {
+        this.classList.remove("active-booking");
+        bookingBtn.classList.remove("active");
+        bookingContainer.classList.remove("active");
+        bookingOverlay.classList.remove("active");
+        unlockScroll();
+      } else {
+        this.classList.toggle("active");
+        subMenu.classList.toggle("active");
+        overlayMenu.classList.toggle("active");
+
+        if (this.classList.contains("active")) {
+          lockScroll();
+        } else {
+          unlockScroll();
+        }
+      }
+    },
+    { passive: false },
+  ); // Giúp mobile mượt, nhưng vẫn cho preventDefault nếu cần
+
+  // Booking button click - thêm null check dù đã check đầu
+  bookingBtn.addEventListener(
+    "click",
+    function (e) {
+      // e.preventDefault(); // nếu là <a> hoặc <button type=submit> thì uncomment
+
+      this.classList.add("active");
+      hamburger.classList.add("active-booking");
+      bookingContainer.classList.add("active");
+      bookingOverlay.classList.add("active");
+
+      // Đóng hamburger nếu đang mở
+      hamburger.classList.remove("active");
+      subMenu.classList.remove("active");
+      overlayMenu.classList.remove("active");
+
+      lockScroll();
+    },
+    { passive: false },
+  );
+
+  // Overlay clicks
+  if (overlayMenu) {
+    overlayMenu.addEventListener("click", () => {
+      hamburger.classList.remove("active");
+      subMenu.classList.remove("active");
+      overlayMenu.classList.remove("active");
+      unlockScroll();
+    });
+  }
+
+  if (bookingOverlay) {
+    bookingOverlay.addEventListener("click", () => {
+      hamburger.classList.remove("active-booking");
       bookingBtn.classList.remove("active");
       bookingContainer.classList.remove("active");
       bookingOverlay.classList.remove("active");
       unlockScroll();
-    } else {
-      this.classList.toggle("active");
-      subMenu.classList.toggle("active");
-      overlayMenu.classList.toggle("active");
-
-      if (this.classList.contains("active")) {
-        lockScroll();
-      } else {
-        unlockScroll();
-      }
-    }
-  });
-
-  // Booking button click
-  bookingBtn.addEventListener("click", function () {
-    this.classList.add("active");
-    hamburger.classList.add("active-booking");
-    bookingContainer.classList.add("active");
-    bookingOverlay.classList.add("active");
-
-    hamburger.classList.remove("active");
-    subMenu.classList.remove("active");
-    overlayMenu.classList.remove("active");
-
-    lockScroll();
-  });
-
-  // Click overlay để đóng
-  overlayMenu.addEventListener("click", function () {
-    hamburger.classList.remove("active");
-    subMenu.classList.remove("active");
-    overlayMenu.classList.remove("active");
-    unlockScroll();
-  });
-
-  bookingOverlay.addEventListener("click", function () {
-    hamburger.classList.remove("active-booking");
-    bookingBtn.classList.remove("active");
-    bookingContainer.classList.remove("active");
-    bookingOverlay.classList.remove("active");
-    unlockScroll();
-  });
+    });
+  }
 }
 export function initScrollToSection() {
   const addressItems = document.querySelectorAll(".fixed-address-item");

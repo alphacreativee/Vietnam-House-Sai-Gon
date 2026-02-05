@@ -43,7 +43,6 @@ document.addEventListener("DOMContentLoaded", () => {
     bannerWithOutHome();
     // changeBackgroundColor();
     swiperLocation();
-    menuGalleryReveal();
   }
 });
 const init = () => {
@@ -60,6 +59,7 @@ const init = () => {
   initScrollToSection();
   galleryLoop();
   // marquee();
+  menuGalleryReveal();
 };
 preloadImages("img").then(() => {
   init();
