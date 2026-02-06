@@ -18,6 +18,7 @@ import {
   initScrollToSection,
   galleryLoop,
   getDateAndTimeBooking,
+  validateBookingForm,
 } from "../../main/js/global.min.js";
 ("use strict");
 $ = jQuery;
@@ -61,6 +62,7 @@ const init = () => {
   // marquee();
   menuGalleryReveal();
   getDateAndTimeBooking();
+  validateBookingForm();
 };
 preloadImages("img").then(() => {
   init();

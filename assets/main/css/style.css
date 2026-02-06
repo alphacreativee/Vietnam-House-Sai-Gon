@@ -387,6 +387,11 @@ section.lightpick .lightpick__day.is-start-date:hover {
   z-index: 999;
   transition: transform 0.5s ease;
 }
+@media (max-width: 991px) {
+  #header .header-container {
+    padding: 24px 24px 0;
+  }
+}
 #header .header-empty {
   pointer-events: none;
 }
@@ -513,10 +518,24 @@ section.lightpick .lightpick__day.is-start-date:hover {
   grid-template-columns: 204px auto;
   gap: 24px;
 }
+@media (max-width: 991px) {
+  #footer .footer-container {
+    grid-template-columns: 1fr;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
 #footer .footer-main-col.menu-col ul {
   display: flex;
   flex-direction: column;
   gap: 8px;
+}
+@media (max-width: 991px) {
+  #footer .footer-main-col.menu-col ul {
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 16px 40px;
+  }
 }
 #footer .footer-main-col.menu-col ul li a {
   font-family: var(--font-body);
@@ -537,6 +556,12 @@ section.lightpick .lightpick__day.is-start-date:hover {
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+@media (max-width: 991px) {
+  #footer .footer-main-col.opening-hours ul {
+    flex-direction: row;
+    gap: 60px;
+  }
 }
 #footer .footer-main-col.opening-hours .opening-item .service,
 #footer .footer-main-col.opening-hours .opening-item .time {
@@ -560,6 +585,11 @@ section.lightpick .lightpick__day.is-start-date:hover {
   gap: 24px;
   margin-bottom: 20px;
 }
+@media (max-width: 991px) {
+  #footer .footer-main-col.address-col .address-group {
+    margin-bottom: 0;
+  }
+}
 #footer .footer-main-top {
   display: grid;
   grid-template-columns: 3fr 2fr 2fr;
@@ -567,12 +597,24 @@ section.lightpick .lightpick__day.is-start-date:hover {
   padding-left: calc(8.3333333333% + 48px);
   padding-left: 128px;
 }
+@media (max-width: 991px) {
+  #footer .footer-main-top {
+    grid-template-columns: 1fr;
+    padding-left: 0;
+  }
+}
 #footer .footer-main-bottom {
   display: grid;
   grid-template-columns: 204px auto;
   gap: 24px;
   padding-top: 70px;
   padding-bottom: 32px;
+}
+@media (max-width: 991px) {
+  #footer .footer-main-bottom {
+    grid-template-columns: 1fr;
+    padding: 24px;
+  }
 }
 #footer .footer-main-bottom .text-managed {
   font-size: 12px;
@@ -582,6 +624,11 @@ section.lightpick .lightpick__day.is-start-date:hover {
   letter-spacing: 0.03rem;
   font-family: var(--font-body);
   text-align: center;
+}
+@media (max-width: 991px) {
+  #footer .footer-main-bottom .text-managed {
+    text-align: left;
+  }
 }
 #footer .footer-main-bottom .text-copyright {
   padding-left: calc(8.3333333333% + 48px);
@@ -596,6 +643,14 @@ section.lightpick .lightpick__day.is-start-date:hover {
   letter-spacing: 0.03rem;
   font-family: var(--font-body);
 }
+@media (max-width: 991px) {
+  #footer .footer-main-bottom .text-copyright {
+    padding-left: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
 #footer .footer-main-bottom .text-copyright span {
   font-size: 12px;
   line-height: 16px;
@@ -604,13 +659,32 @@ section.lightpick .lightpick__day.is-start-date:hover {
   letter-spacing: 0.03rem;
   font-family: var(--font-body);
 }
+@media (max-width: 991px) {
+  #footer .footer-main-bottom .text-copyright span {
+    white-space: nowrap;
+  }
+  #footer .footer-main-bottom .text-copyright span:nth-child(2) {
+    display: none;
+  }
+}
 #footer .footer-main-bottom .footer-bottom-right {
   display: grid;
   grid-template-columns: 5fr 2fr;
   gap: 24px;
 }
+@media (max-width: 991px) {
+  #footer .footer-main-bottom .footer-bottom-right {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+}
 #footer .footer-main-bottom .footer-bottom-right .social {
   padding-left: 42px;
+}
+@media (max-width: 991px) {
+  #footer .footer-main-bottom .footer-bottom-right .social {
+    padding-left: 0;
+  }
 }
 #footer .footer-main-bottom .footer-bottom-right .social ul {
   display: flex;
@@ -639,6 +713,12 @@ section.lightpick .lightpick__day.is-start-date:hover {
   color: var(--color-primary);
   letter-spacing: 0.03rem;
 }
+@media (max-width: 991px) {
+  #footer .footer-logo img {
+    width: 140px;
+    height: auto;
+  }
+}
 
 #loading {
   position: fixed;
@@ -658,6 +738,12 @@ section.lightpick .lightpick__day.is-start-date:hover {
   height: 100svh;
   overflow: hidden;
   padding-right: 48px;
+}
+@media (max-width: 991px) {
+  .hero {
+    height: auto;
+    padding-right: 0;
+  }
 }
 .hero.content-direction {
   display: flex;
@@ -692,11 +778,21 @@ section.lightpick .lightpick__day.is-start-date:hover {
   grid-template-columns: 8fr 4fr;
   height: 100%;
 }
+@media (max-width: 991px) {
+  .hero-container {
+    grid-template-columns: 1fr;
+  }
+}
 .hero-image {
   width: 100%;
   height: 100%;
   position: relative;
   overflow: hidden;
+}
+@media (max-width: 991px) {
+  .hero-image {
+    height: 100svh;
+  }
 }
 .hero-image-wrapper {
   height: 100%;
@@ -1646,7 +1742,6 @@ section.lightpick .lightpick__day.is-start-date:hover {
   height: 100vh;
   z-index: 789;
   width: calc(33.3333333333% + 32px);
-  padding: 100px 48px 40px 40px;
   transition: all 0.3s ease;
   will-change: clip-path;
   clip-path: inset(0 0 0 100%);
@@ -1807,20 +1902,21 @@ section.lightpick .lightpick__day.is-start-date:hover {
   left: 0;
   transform: translate(-50%, 0);
 }
-#booking .booking-container form .select-time {
+#booking .booking-container form .dropdown-custom-select {
   position: relative;
 }
-#booking .booking-container form .select-time .dropdown-custom-btn {
+#booking .booking-container form .dropdown-custom-select .dropdown-custom-btn {
   border-bottom: 1px solid var(--color-primary);
   padding-bottom: 4px;
+  cursor: pointer;
 }
-#booking .booking-container form .select-time .dropdown-custom-text {
+#booking .booking-container form .dropdown-custom-select .dropdown-custom-text {
   color: rgba(0, 44, 72, 0.3);
 }
-#booking .booking-container form .select-time .dropdown-custom-text.selected {
+#booking .booking-container form .dropdown-custom-select .dropdown-custom-text.selected {
   color: var(--color-primary);
 }
-#booking .booking-container form .select-time .dropdown-custom-menu {
+#booking .booking-container form .dropdown-custom-select .dropdown-custom-menu {
   position: absolute;
   top: 100%;
   background-color: var(--color-primary-1);
@@ -1834,11 +1930,23 @@ section.lightpick .lightpick__day.is-start-date:hover {
   transition: clip-path 0.3s ease;
   will-change: clip-path;
 }
-#booking .booking-container form .select-time .dropdown-custom-menu.dropdown--active {
+#booking .booking-container form .dropdown-custom-select .dropdown-custom-menu.dropdown--active {
   clip-path: inset(0 0 0 0);
 }
-#booking .booking-container form .select-time .dropdown-custom-item {
+#booking .booking-container form .dropdown-custom-select .dropdown-custom-item {
   font-size: 16px;
   line-height: 26px;
   color: var(--color-white);
+  cursor: pointer;
+}
+#booking .booking-container form .form-button {
+  margin-top: 60px;
+}
+#booking .booking-wrapper {
+  height: 100%;
+  overflow-y: scroll;
+  padding: 100px 48px 40px 40px;
+}
+#booking .booking-wrapper::-webkit-scrollbar {
+  display: none;
 }

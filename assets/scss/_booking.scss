@@ -25,7 +25,6 @@
       height: 100vh;
       z-index: 789;
       width: calc(calc(4 / 12) * 100% + 32px);
-      padding: 100px 48px 40px 40px;
       transition: all 0.3s ease;
       will-change: clip-path;
       clip-path: inset(0 0 0 100%);
@@ -209,11 +208,12 @@
             }
           }
         }
-        .select-time {
+        .dropdown-custom-select {
           position: relative;
           .dropdown-custom-btn {
             border-bottom: 1px solid var(--color-primary);
             padding-bottom: 4px;
+            cursor: pointer;
           }
           .dropdown-custom-text {
             color: rgba(0, 44, 72, 0.3);
@@ -243,8 +243,20 @@
             font-size: 16px;
             line-height: 26px;
             color: var(--color-white);
+            cursor: pointer;
           }
         }
+        .form-button {
+          margin-top: 60px;
+        }
+      }
+    }
+    &-wrapper {
+      height: 100%;
+      overflow-y: scroll;
+      padding: 100px 48px 40px 40px;
+      &::-webkit-scrollbar {
+        display: none;
       }
     }
   }

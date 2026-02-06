@@ -1,118 +1,174 @@
-<div class="booking-overlay active"></div>
-<div class="booking-container active">
-  <form action="">
-    <div class="group-row full">
-      <div class="row-item">
-        <label for="name">Full Name*</label>
-        <input type="text" placeholder="Your name" name="name" require />
+<div class="booking-overlay"></div>
+<div class="booking-container" data-lenis-prevent>
+  <div class="booking-wrapper">
+    <form action="">
+      <div class="group-row">
+        <div class="row-item">
+          <label for="name">Full Name*</label>
+          <input
+            type="text"
+            placeholder="Your name"
+            name="name"
+            require
+            autocomplete="off"
+          />
+        </div>
+        <div class="row-item">
+          <label for="phone">Phone Number*</label>
+          <input
+            placeholder="Your phone"
+            name="phone"
+            type="tel"
+            id="phone"
+            require
+          />
+        </div>
       </div>
-    </div>
-    <div class="group-row full">
-      <div class="row-item">
-        <label for="phone">Phone Number*</label>
-        <input
-          placeholder="Your phone"
-          name="phone"
-          type="tel"
-          id="phone"
-          require
-        />
-      </div>
-    </div>
-    <div class="group-row full">
-      <div class="row-item">
-        <label for="email">Email Address</label>
-        <input
-          name="email"
-          type="email"
-          id="email"
-          pattern=".+@example\.com"
-          size="30"
-          required
-          placeholder="Your email"
-          autocomplete="off"
-        />
-      </div>
-    </div>
-    <div class="group-row">
-      <div class="row-item">
-        <label for="date">Date*</label>
-        <input
-          type="text"
-          placeholder="Select Date"
-          name="date"
-          require
-          id="select-date"
-        />
-      </div>
-      <div class="row-item">
-        <label for="time">Time*</label>
-        <input type="hidden" id="select-time" />
-        <div class="dropdown-custom-select select-time">
-          <div
-            class="dropdown-custom-btn d-flex align-items-center justify-content-between"
-          >
-            <div class="d-flex align-items-center dropdown-custom-label gap-2">
-              <div class="dropdown-custom-text">Select Time</div>
+
+      <div class="group-row">
+        <div class="row-item">
+          <label for="email">Email Address</label>
+          <input
+            name="email"
+            type="email"
+            id="email"
+            pattern=".+@example\.com"
+            required
+            placeholder="Your email"
+            autocomplete="off"
+          />
+        </div>
+        <div class="row-item">
+          <label for="occasion">Occasion</label>
+          <input type="hidden" id="select-time" />
+          <div class="dropdown-custom-select select-time">
+            <div
+              class="dropdown-custom-btn d-flex align-items-center justify-content-between"
+            >
+              <div
+                class="d-flex align-items-center dropdown-custom-label gap-2"
+              >
+                <div class="dropdown-custom-text">Select Occasion</div>
+              </div>
+            </div>
+            <div class="dropdown-custom-menu">
+              <div class="dropdown-custom-item">Event</div>
+              <div class="dropdown-custom-item">Brithday</div>
             </div>
           </div>
-          <div class="dropdown-custom-menu">
-            <div class="dropdown-custom-item">6:00 PM</div>
-            <div class="dropdown-custom-item">7:00 PM</div>
-            <div class="dropdown-custom-item">8:00 PM</div>
+        </div>
+      </div>
+      <div class="group-row">
+        <div class="row-item">
+          <label for="date">Date*</label>
+          <input
+            type="text"
+            placeholder="Select Date"
+            name="date"
+            require
+            id="select-date"
+          />
+        </div>
+        <div class="row-item">
+          <label for="time">Time*</label>
+          <input type="hidden" id="select-time" />
+          <div class="dropdown-custom-select select-time">
+            <div
+              class="dropdown-custom-btn d-flex align-items-center justify-content-between"
+            >
+              <div
+                class="d-flex align-items-center dropdown-custom-label gap-2"
+              >
+                <div class="dropdown-custom-text">Select Time</div>
+              </div>
+            </div>
+            <div class="dropdown-custom-menu">
+              <div class="dropdown-custom-item">6:00 PM</div>
+              <div class="dropdown-custom-item">7:00 PM</div>
+              <div class="dropdown-custom-item">8:00 PM</div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="group-row full m-0">
-      <div class="row-item">
-        <label for="">Number of Guests:</label>
-        <div class="range-wrap">
-          <div class="range-value" id="rangeV">0</div>
-          <input id="range" type="range" min="0" max="100" value="0" step="1" />
-        </div>
-      </div>
-    </div>
-    <div class="group-row full">
-      <div class="row-item">
-        <label>Select venue</label>
-        <div class="radio-list">
-          <div class="radio-item">
-            <input type="radio" name="venue" id="venue1" />
-            <label for="venue1">Union Square</label>
-          </div>
-          <div class="radio-item">
-            <input type="radio" name="venue" id="venue2" />
-            <label for="venue2">Dong Khoi</label>
+
+      <div class="group-row full m-0">
+        <div class="row-item">
+          <label for="">Number of Guests:</label>
+          <div class="range-wrap">
+            <div class="range-value" id="rangeV">0</div>
+            <input
+              id="range"
+              type="range"
+              min="0"
+              max="100"
+              value="0"
+              step="1"
+            />
           </div>
         </div>
       </div>
-    </div>
-    <div class="group-row full">
-      <div class="row-item">
-        <label>Seating Preference</label>
-        <div class="radio-list">
-          <div class="radio-item">
-            <input type="radio" name="preference" id="preference1" />
-            <label for="preference1">Private Room</label>
-          </div>
-          <div class="radio-item">
-            <input type="radio" name="preference" id="preference2" />
-            <label for="preference2">Other</label>
+      <div class="group-row full">
+        <div class="row-item">
+          <label>Select venue</label>
+          <div class="radio-list">
+            <div class="radio-item">
+              <input type="radio" name="venue" id="venue1" />
+              <label for="venue1">Union Square</label>
+            </div>
+            <div class="radio-item">
+              <input type="radio" name="venue" id="venue2" />
+              <label for="venue2">Dong Khoi</label>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="group-row full">
-      <div class="row-item">
-        <label for="note">Other Requirements</label>
-        <textarea
-          id="note"
-          name="note"
-          rows="2"
-          placeholder="Your requirements"
-        ></textarea>
+      <div class="group-row full">
+        <div class="row-item">
+          <label>Seating Preference</label>
+          <div class="radio-list">
+            <div class="radio-item">
+              <input type="radio" name="preference" id="preference1" />
+              <label for="preference1">Private Room</label>
+            </div>
+            <div class="radio-item">
+              <input type="radio" name="preference" id="preference2" />
+              <label for="preference2">Other</label>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </form>
+      <div class="group-row full">
+        <div class="row-item">
+          <label for="note">Other Requirements</label>
+          <textarea
+            id="note"
+            name="note"
+            rows="2"
+            placeholder="Your requirements"
+          ></textarea>
+        </div>
+      </div>
+      <div class="form-button d-flex justify-content-end">
+        <button type="submit" class="button-global">
+          <span class="text-wrapper">
+            <span class="text-default">Submit</span>
+            <div class="icon">
+              <svg
+                width="6"
+                height="10"
+                viewBox="0 0 6 10"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M0.373535 9.33215L4.37354 4.83215L0.373535 0.332153"
+                  stroke="#002C48"
+                />
+              </svg>
+            </div>
+          </span>
+        </button>
+      </div>
+    </form>
+  </div>
 </div>

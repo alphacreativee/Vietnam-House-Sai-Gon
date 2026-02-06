@@ -1473,3 +1473,4 @@ export function getDateAndTimeBooking() {
     field: document.getElementById("select-date"),
   });
 }
+export function validateBookingForm() {}
