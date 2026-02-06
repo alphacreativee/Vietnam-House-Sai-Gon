@@ -209,6 +209,42 @@
             }
           }
         }
+        .select-time {
+          position: relative;
+          .dropdown-custom-btn {
+            border-bottom: 1px solid var(--color-primary);
+            padding-bottom: 4px;
+          }
+          .dropdown-custom-text {
+            color: rgba(0, 44, 72, 0.3);
+            &.selected {
+              color: var(--color-primary);
+            }
+          }
+          .dropdown-custom-menu {
+            position: absolute;
+            top: 100%;
+
+            background-color: var(--color-primary-1);
+            width: 100%;
+            z-index: 2;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            clip-path: inset(0 0 100% 0);
+            transition: clip-path 0.3s ease;
+            will-change: clip-path;
+            &.dropdown--active {
+              clip-path: inset(0 0 0 0);
+            }
+          }
+          .dropdown-custom-item {
+            font-size: 16px;
+            line-height: 26px;
+            color: var(--color-white);
+          }
+        }
       }
     }
   }

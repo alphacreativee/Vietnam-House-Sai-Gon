@@ -30,17 +30,38 @@
           size="30"
           required
           placeholder="Your email"
+          autocomplete="off"
         />
       </div>
     </div>
     <div class="group-row">
       <div class="row-item">
         <label for="date">Date*</label>
-        <input type="text" placeholder="Select Date" name="date" require />
+        <input
+          type="text"
+          placeholder="Select Date"
+          name="date"
+          require
+          id="select-date"
+        />
       </div>
       <div class="row-item">
         <label for="time">Time*</label>
-        <input type="text" placeholder="Select Time" name="time" require />
+        <input type="hidden" id="select-time" />
+        <div class="dropdown-custom-select select-time">
+          <div
+            class="dropdown-custom-btn d-flex align-items-center justify-content-between"
+          >
+            <div class="d-flex align-items-center dropdown-custom-label gap-2">
+              <div class="dropdown-custom-text">Select Time</div>
+            </div>
+          </div>
+          <div class="dropdown-custom-menu">
+            <div class="dropdown-custom-item">6:00 PM</div>
+            <div class="dropdown-custom-item">7:00 PM</div>
+            <div class="dropdown-custom-item">8:00 PM</div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="group-row full m-0">

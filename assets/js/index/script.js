@@ -17,6 +17,7 @@ import {
   headerMobile,
   initScrollToSection,
   galleryLoop,
+  getDateAndTimeBooking,
 } from "../../main/js/global.min.js";
 ("use strict");
 $ = jQuery;
@@ -59,6 +60,7 @@ const init = () => {
   galleryLoop();
   // marquee();
   menuGalleryReveal();
+  getDateAndTimeBooking();
 };
 preloadImages("img").then(() => {
   init();

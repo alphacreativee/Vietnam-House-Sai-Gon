@@ -187,3 +187,25 @@
     max-width: 320px;
   }
 }
+section.lightpick {
+  & > * {
+    font-family: var(--font-body);
+  }
+  .lightpick__month-title {
+    margin-left: 0;
+    padding-left: 0;
+  }
+  .lightpick__day.is-today {
+    color: var(--color-primary-1);
+    background-image: none;
+  }
+  .lightpick__day.is-end-date,
+  .lightpick__day.is-end-date:hover,
+  .lightpick__day.is-start-date,
+  .lightpick__day.is-start-date:hover {
+    background-image: none;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-radius: 50%;
+  }
+}

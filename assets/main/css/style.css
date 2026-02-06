@@ -353,6 +353,27 @@ main {
   max-width: 320px;
 }
 
+section.lightpick > * {
+  font-family: var(--font-body);
+}
+section.lightpick .lightpick__month-title {
+  margin-left: 0;
+  padding-left: 0;
+}
+section.lightpick .lightpick__day.is-today {
+  color: var(--color-primary-1);
+  background-image: none;
+}
+section.lightpick .lightpick__day.is-end-date,
+section.lightpick .lightpick__day.is-end-date:hover,
+section.lightpick .lightpick__day.is-start-date,
+section.lightpick .lightpick__day.is-start-date:hover {
+  background-image: none;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border-radius: 50%;
+}
+
 #header .header-container {
   padding: 24px 48px 0;
   display: grid;
@@ -1785,4 +1806,39 @@ main {
   position: absolute;
   left: 0;
   transform: translate(-50%, 0);
+}
+#booking .booking-container form .select-time {
+  position: relative;
+}
+#booking .booking-container form .select-time .dropdown-custom-btn {
+  border-bottom: 1px solid var(--color-primary);
+  padding-bottom: 4px;
+}
+#booking .booking-container form .select-time .dropdown-custom-text {
+  color: rgba(0, 44, 72, 0.3);
+}
+#booking .booking-container form .select-time .dropdown-custom-text.selected {
+  color: var(--color-primary);
+}
+#booking .booking-container form .select-time .dropdown-custom-menu {
+  position: absolute;
+  top: 100%;
+  background-color: var(--color-primary-1);
+  width: 100%;
+  z-index: 2;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 0.3s ease;
+  will-change: clip-path;
+}
+#booking .booking-container form .select-time .dropdown-custom-menu.dropdown--active {
+  clip-path: inset(0 0 0 0);
+}
+#booking .booking-container form .select-time .dropdown-custom-item {
+  font-size: 16px;
+  line-height: 26px;
+  color: var(--color-white);
 }

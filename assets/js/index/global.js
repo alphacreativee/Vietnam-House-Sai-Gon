@@ -31,6 +31,9 @@ export function customDropdown() {
           const optionText = item.textContent;
           displayText.textContent = optionText;
           dropdown.classList.add("selected");
+
+          // Thêm class vào dropdown-custom-text
+          displayText.classList.add("selected"); // hoặc tên class khác bạn muốn
         } else {
           const currentImgEl = valueSelect.querySelector("img");
           const currentImg = currentImgEl ? currentImgEl.src : "";
@@ -1463,5 +1466,10 @@ export function galleryLoop() {
           );
       });
     },
+  });
+}
+export function getDateAndTimeBooking() {
+  var picker = new Lightpick({
+    field: document.getElementById("select-date"),
   });
 }
