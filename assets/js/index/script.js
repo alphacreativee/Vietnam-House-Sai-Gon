@@ -31,7 +31,6 @@ gsap.ticker.add((time) => {
 gsap.ticker.lagSmoothing(0);
 document.addEventListener("DOMContentLoaded", () => {
   const loadingElement = document.getElementById("loading");
-
   if (loadingElement) {
     loading()
       .then(() => {
@@ -55,7 +54,7 @@ const init = () => {
   ctaRun();
   // mousetail();
   unionSectionAnimation();
-  headerMobile();
+
   initScrollToSection();
   galleryLoop();
   // marquee();
@@ -116,3 +115,26 @@ if (document.readyState === "loading") {
 
 // Chạy lại khi tất cả resources load xong
 window.addEventListener("load", initFooter);
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", headerMobile);
+} else {
+  headerMobile(); // DOM đã sẵn sàng
+}
+// custom style range
+
+const range = document.getElementById("range"),
+  rangeV = document.getElementById("rangeV"),
+  setValue = () => {
+    const newValue = Number(
+        ((range.value - range.min) * 100) / (range.max - range.min),
+      ),
+      newPosition = 5 - newValue * 0.1;
+
+    rangeV.innerHTML = `<span>${range.value}</span>`;
+    rangeV.style.left = `calc(${newValue}% + (${newPosition}px))`;
+
+    range.style.setProperty("--progress", `${newValue}%`);
+  };
+
+document.addEventListener("DOMContentLoaded", setValue);
+range.addEventListener("input", setValue);

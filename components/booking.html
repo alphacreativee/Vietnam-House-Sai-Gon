@@ -1,5 +1,5 @@
-<div class="booking-overlay"></div>
-<div class="booking-container">
+<div class="booking-overlay active"></div>
+<div class="booking-container active">
   <form action="">
     <div class="group-row full">
       <div class="row-item">
@@ -41,6 +41,56 @@
       <div class="row-item">
         <label for="time">Time*</label>
         <input type="text" placeholder="Select Time" name="time" require />
+      </div>
+    </div>
+    <div class="group-row full m-0">
+      <div class="row-item">
+        <label for="">Number of Guests:</label>
+        <div class="range-wrap">
+          <div class="range-value" id="rangeV">0</div>
+          <input id="range" type="range" min="0" max="100" value="0" step="1" />
+        </div>
+      </div>
+    </div>
+    <div class="group-row full">
+      <div class="row-item">
+        <label>Select venue</label>
+        <div class="radio-list">
+          <div class="radio-item">
+            <input type="radio" name="venue" id="venue1" />
+            <label for="venue1">Union Square</label>
+          </div>
+          <div class="radio-item">
+            <input type="radio" name="venue" id="venue2" />
+            <label for="venue2">Dong Khoi</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="group-row full">
+      <div class="row-item">
+        <label>Seating Preference</label>
+        <div class="radio-list">
+          <div class="radio-item">
+            <input type="radio" name="preference" id="preference1" />
+            <label for="preference1">Private Room</label>
+          </div>
+          <div class="radio-item">
+            <input type="radio" name="preference" id="preference2" />
+            <label for="preference2">Other</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="group-row full">
+      <div class="row-item">
+        <label for="note">Other Requirements</label>
+        <textarea
+          id="note"
+          name="note"
+          rows="2"
+          placeholder="Your requirements"
+        ></textarea>
       </div>
     </div>
   </form>

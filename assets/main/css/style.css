@@ -1625,7 +1625,7 @@ main {
   height: 100vh;
   z-index: 789;
   width: calc(33.3333333333% + 32px);
-  padding: 120px 40px 40px;
+  padding: 100px 48px 40px 40px;
   transition: all 0.3s ease;
   will-change: clip-path;
   clip-path: inset(0 0 0 100%);
@@ -1655,15 +1655,134 @@ main {
   line-height: 16px;
   color: var(--color-primary);
 }
-#booking .booking-container form .group-row .row-item input {
+#booking .booking-container form .group-row .row-item input,
+#booking .booking-container form .group-row .row-item textarea {
   box-shadow: none;
   outline: none;
   border: none;
   border-bottom: 1px solid var(--color-primary);
   padding-bottom: 4px;
 }
-#booking .booking-container form .group-row .row-item input::placeholder {
+#booking .booking-container form .group-row .row-item input::placeholder,
+#booking .booking-container form .group-row .row-item textarea::placeholder {
   font-size: 16px;
   line-height: 26px;
   color: rgba(0, 44, 72, 0.3);
+}
+#booking .booking-container form .group-row .row-item textarea {
+  resize: none;
+}
+#booking .booking-container form .group-row .row-item input[type=radio] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 15px;
+  height: 15px;
+  border: 1px solid var(--color-primary);
+  border-radius: 50%;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+}
+#booking .booking-container form .group-row .row-item input[type=radio]:checked::before {
+  opacity: 1;
+  visibility: visible;
+}
+#booking .booking-container form .group-row .row-item input[type=radio]::before {
+  content: "";
+  display: block;
+  width: 10px;
+  height: 10px;
+  background-color: var(--color-primary);
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+#booking .booking-container form .group-row .row-item .radio-list {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+#booking .booking-container form .group-row .row-item .radio-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+#booking .booking-container form .group-row .row-item .radio-item label {
+  font-size: 16px;
+  line-height: 26px;
+  color: var(--color-primary);
+  font-weight: normal;
+}
+#booking .booking-container form .group-row .row-item input[type=range] {
+  -webkit-appearance: none;
+  margin: 16px 0 0;
+  width: 100%;
+  border-bottom: none;
+  padding: 10px 0;
+  background: transparent;
+  --progress: 0%;
+}
+#booking .booking-container form .group-row .row-item input[type=range]:focus {
+  outline: none;
+}
+#booking .booking-container form .group-row .row-item input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 1px;
+  cursor: pointer;
+  animate: 0.2s;
+  background: linear-gradient(to right, var(--color-primary) 0%, var(--color-primary) var(--progress), rgba(0, 44, 72, 0.3) var(--progress), rgba(0, 44, 72, 0.3) 100%);
+  border-radius: 25px;
+}
+#booking .booking-container form .group-row .row-item input[type=range]::-webkit-slider-thumb {
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -5px;
+}
+#booking .booking-container form .group-row .row-item input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 1px;
+  cursor: pointer;
+  background: linear-gradient(to right, var(--color-primary) 0%, var(--color-primary) var(--progress), rgba(0, 44, 72, 0.3) var(--progress), rgba(0, 44, 72, 0.3) 100%);
+  border-radius: 25px;
+}
+#booking .booking-container form .group-row .row-item input[type=range]::-moz-range-thumb {
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  cursor: pointer;
+  border: none;
+}
+#booking .booking-container form .group-row .row-item input[type=range]::-moz-range-progress {
+  background: var(--color-primary);
+  height: 1px;
+  border-radius: 25px;
+}
+#booking .booking-container form .group-row .row-item .range-wrap {
+  position: relative;
+}
+#booking .booking-container form .group-row .row-item .range-value {
+  position: absolute;
+  top: -4px;
+}
+#booking .booking-container form .group-row .row-item .range-value span {
+  width: 30px;
+  height: 26px;
+  line-height: 26px;
+  text-align: center;
+  color: var(--color-primary);
+  font-size: 16px;
+  display: block;
+  position: absolute;
+  left: 0;
+  transform: translate(-50%, 0);
 }

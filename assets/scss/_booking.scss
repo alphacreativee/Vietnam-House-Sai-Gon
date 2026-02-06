@@ -25,7 +25,7 @@
       height: 100vh;
       z-index: 789;
       width: calc(calc(4 / 12) * 100% + 32px);
-      padding: 120px 40px 40px;
+      padding: 100px 48px 40px 40px;
       transition: all 0.3s ease;
       will-change: clip-path;
       clip-path: inset(0 0 0 100%);
@@ -53,7 +53,8 @@
               line-height: 16px;
               color: var(--color-primary);
             }
-            input {
+            input,
+            textarea {
               box-shadow: none;
               outline: none;
               border: none;
@@ -64,6 +65,147 @@
                 line-height: 26px;
                 color: rgba(0, 44, 72, 0.3);
               }
+            }
+            textarea {
+              resize: none;
+            }
+            input[type="radio"] {
+              appearance: none;
+              -webkit-appearance: none;
+              width: 15px;
+              height: 15px;
+              border: 1px solid var(--color-primary);
+              border-radius: 50%;
+              outline: none;
+              cursor: pointer;
+              position: relative;
+              &:checked {
+                &::before {
+                  opacity: 1;
+                  visibility: visible;
+                }
+              }
+              &::before {
+                content: "";
+                display: block;
+                width: 10px;
+                height: 10px;
+                background-color: var(--color-primary);
+                border-radius: 50%;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+              }
+            }
+            .radio-list {
+              display: flex;
+              align-items: center;
+              gap: 24px;
+            }
+            .radio-item {
+              display: flex;
+              align-items: center;
+              gap: 12px;
+              label {
+                font-size: 16px;
+                line-height: 26px;
+                color: var(--color-primary);
+                font-weight: normal;
+              }
+            }
+
+            input[type="range"] {
+              -webkit-appearance: none;
+              margin: 16px 0 0;
+              width: 100%;
+              border-bottom: none;
+              padding: 10px 0;
+              background: transparent;
+
+              --progress: 0%;
+
+              &:focus {
+                outline: none;
+              }
+
+              &::-webkit-slider-runnable-track {
+                width: 100%;
+                height: 1px;
+                cursor: pointer;
+                animate: 0.2s;
+                // Dùng CSS variable để tạo gradient động
+                background: linear-gradient(
+                  to right,
+                  var(--color-primary) 0%,
+                  var(--color-primary) var(--progress),
+                  rgba(0, 44, 72, 0.3) var(--progress),
+                  rgba(0, 44, 72, 0.3) 100%
+                );
+                border-radius: 25px;
+              }
+
+              &::-webkit-slider-thumb {
+                height: 10px;
+                width: 10px;
+                border-radius: 50%;
+                background: var(--color-primary);
+                cursor: pointer;
+                -webkit-appearance: none;
+                margin-top: -5px;
+              }
+
+              // Firefox
+              &::-moz-range-track {
+                width: 100%;
+                height: 1px;
+                cursor: pointer;
+                background: linear-gradient(
+                  to right,
+                  var(--color-primary) 0%,
+                  var(--color-primary) var(--progress),
+                  rgba(0, 44, 72, 0.3) var(--progress),
+                  rgba(0, 44, 72, 0.3) 100%
+                );
+                border-radius: 25px;
+              }
+
+              &::-moz-range-thumb {
+                height: 10px;
+                width: 10px;
+                border-radius: 50%;
+                background: var(--color-primary);
+                cursor: pointer;
+                border: none;
+              }
+
+              &::-moz-range-progress {
+                background: var(--color-primary);
+                height: 1px;
+                border-radius: 25px;
+              }
+            }
+            .range-wrap {
+              position: relative;
+            }
+            .range-value {
+              position: absolute;
+              top: -4px;
+            }
+            .range-value span {
+              width: 30px;
+              height: 26px;
+              line-height: 26px;
+              text-align: center;
+              color: var(--color-primary);
+              font-size: 16px;
+              display: block;
+              position: absolute;
+              left: 0;
+              transform: translate(-50%, 0);
             }
           }
         }
